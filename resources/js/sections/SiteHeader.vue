@@ -1,4 +1,5 @@
 <script setup>
+import { useCopy } from '@/composables/useCopy'
 import { useCountdown } from '@/composables/useCountdown'
 
 const props = defineProps({
@@ -6,13 +7,14 @@ const props = defineProps({
     guest: { type: Object, default: null },
 })
 
-const countdown = useCountdown(props.site)
+const t = useCopy()
+const countdown = useCountdown(props.site, t)
 </script>
 
 <template>
     <header class="flex flex-col items-center px-[24px] pt-[86px] text-center">
         <p class="m-0 text-[12px] font-normal uppercase tracking-[.32em] text-clay">
-            {{ guest?.greeting ?? 'You are invited' }}
+            {{ guest?.greeting ?? t('header.greeting_fallback') }}
         </p>
 
         <h1

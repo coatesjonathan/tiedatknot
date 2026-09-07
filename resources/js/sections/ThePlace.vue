@@ -1,12 +1,15 @@
 <script setup>
+import { useCopy } from '@/composables/useCopy'
 import RevealSection from '@/components/RevealSection.vue'
 
 defineProps({ venue: { type: Object, required: true } })
+
+const t = useCopy()
 </script>
 
 <template>
     <RevealSection class="mx-auto max-w-[1120px] px-[24px] pt-[88px]">
-        <p class="mb-[26px] text-[12px] font-medium uppercase tracking-[.3em] text-clay">The place</p>
+        <p class="mb-[26px] text-[12px] font-medium uppercase tracking-[.3em] text-clay">{{ t('section.place') }}</p>
 
         <div class="grid items-start gap-[40px] [grid-template-columns:repeat(auto-fit,minmax(290px,1fr))]">
             <div>
@@ -32,7 +35,7 @@ defineProps({ venue: { type: Object, required: true } })
                         target="_blank"
                         rel="noopener"
                         class="border-b border-olive/40 text-[12px] font-medium uppercase tracking-[.26em] text-olive hover:border-olive-dark hover:text-olive-dark"
-                        >Open in maps</a
+                        >{{ t('link.maps') }}</a
                     >
                 </p>
             </div>

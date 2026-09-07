@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Guest;
+use App\Support\SiteCopy;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
@@ -19,15 +20,15 @@ class GateController extends Controller
         $data = $request->validate([
             'email' => ['required', 'string', 'max:255', 'regex:/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/'],
         ], [
-            'email.required' => 'That does not look like an email address.',
-            'email.regex' => 'That does not look like an email address.',
+            'email.required' => SiteCopy::line('gate.error_invalid'),
+            'email.regex' => SiteCopy::line('gate.error_invalid'),
         ]);
 
         $guest = Guest::findByEmail($data['email']);
 
         if (! $guest) {
             throw ValidationException::withMessages([
-                'email' => "We can't find that address on our list — try the one the invitation came to.",
+                'email' => SiteCopy::line('gate.error_unknown'),
             ]);
         }
 

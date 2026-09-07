@@ -1,13 +1,16 @@
 <script setup>
+import { useCopy } from '@/composables/useCopy'
 import RevealSection from '@/components/RevealSection.vue'
 import { richText } from '@/utils/richText'
 
 defineProps({ faqs: { type: Array, default: () => [] } })
+
+const t = useCopy()
 </script>
 
 <template>
     <RevealSection class="mx-auto max-w-[820px] px-[24px] pt-[88px]">
-        <p class="mb-[22px] text-[12px] font-medium uppercase tracking-[.3em] text-clay">Questions</p>
+        <p class="mb-[22px] text-[12px] font-medium uppercase tracking-[.3em] text-clay">{{ t('section.questions') }}</p>
 
         <details
             v-for="(faq, index) in faqs"

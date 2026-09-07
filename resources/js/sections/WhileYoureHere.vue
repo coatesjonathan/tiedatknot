@@ -1,12 +1,15 @@
 <script setup>
+import { useCopy } from '@/composables/useCopy'
 import RevealSection from '@/components/RevealSection.vue'
 
 defineProps({ highlights: { type: Array, default: () => [] } })
+
+const t = useCopy()
 </script>
 
 <template>
     <RevealSection class="mx-auto max-w-[1120px] px-[24px] pt-[88px]">
-        <p class="mb-[26px] text-[12px] font-medium uppercase tracking-[.3em] text-clay">While you're here</p>
+        <p class="mb-[26px] text-[12px] font-medium uppercase tracking-[.3em] text-clay">{{ t('section.highlights') }}</p>
 
         <div class="grid gap-[34px] [grid-template-columns:repeat(auto-fit,minmax(230px,1fr))]">
             <div v-for="item in highlights" :key="item.title">

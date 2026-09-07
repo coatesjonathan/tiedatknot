@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Guest;
+use App\Support\SiteCopy;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpKernel\Exception\HttpException;
@@ -24,11 +25,11 @@ class RsvpController extends Controller
             'party.*.dietary' => ['nullable', 'string', 'max:500'],
             'rsvp_note' => ['nullable', 'string', 'max:2000'],
         ], [
-            'attending.required' => 'Let us know whether you can make it.',
-            'party.required' => 'Tell us who is coming.',
-            'party.min' => 'Tell us who is coming.',
-            'party.max' => "We've only saved {$guest->seats} ".str('seat')->plural($guest->seats).' for you — send us a note if you need more.',
-            'party.*.name.required' => 'We need a name for everyone coming.',
+            'attending.required' => SiteCopy::line('rsvp.error_attending'),
+            'party.required' => SiteCopy::line('rsvp.error_party'),
+            'party.min' => SiteCopy::line('rsvp.error_party'),
+            'party.max' => SiteCopy::line('rsvp.error_party_max', ['count' => $guest->seats]),
+            'party.*.name.required' => SiteCopy::line('rsvp.error_name'),
         ]);
 
         $guest->recordRsvp(
@@ -46,7 +47,7 @@ class RsvpController extends Controller
         $guest = $id ? Guest::find($id) : null;
 
         if (! $guest) {
-            throw new HttpException(403, 'Open your invitation before replying.');
+            throw new HttpException(403, SiteCopy::line('rsvp.error_locked'));
         }
 
         return $guest;

@@ -1,8 +1,9 @@
 <script setup>
-import { computed, ref, watch } from 'vue'
+import { computed, provide, ref, watch } from 'vue'
 import { Head, router, useForm } from '@inertiajs/vue3'
 import { lock, unlock } from '@/actions/App/Http/Controllers/GateController'
 import Gate from '@/components/Gate.vue'
+import { COPY_KEY } from '@/composables/useCopy'
 import { useEnvelopeSequence } from '@/composables/useEnvelopeSequence'
 import Gallery from '@/sections/Gallery.vue'
 import GettingThere from '@/sections/GettingThere.vue'
@@ -23,6 +24,13 @@ const props = defineProps({
     unlocked: { type: Boolean, default: false },
     invitation: { type: Object, default: null },
 })
+
+// Admin-editable wording. The gate only ever receives its own lines; the rest
+// arrives with the invitation props once the guest has unlocked.
+provide(
+    COPY_KEY,
+    computed(() => ({ ...(props.site.copy ?? {}), ...(props.invitation?.copy ?? {}) })),
+)
 
 // A returning guest lands straight on the invitation; everyone else starts sealed.
 const { stage, vals, run, reset } = useEnvelopeSequence(props.site.animationSpeed, props.unlocked)

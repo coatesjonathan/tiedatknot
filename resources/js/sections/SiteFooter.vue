@@ -1,7 +1,11 @@
 <script setup>
+import { useCopy } from '@/composables/useCopy'
+
 defineProps({ site: { type: Object, required: true } })
 
 defineEmits(['replay'])
+
+const t = useCopy()
 </script>
 
 <template>
@@ -21,7 +25,7 @@ defineEmits(['replay'])
             class="mt-[6px] cursor-pointer rounded-sheet border border-input-border px-[24px] py-[11px] text-[11px] font-medium uppercase tracking-[.26em] text-ink-faint"
             @click="$emit('replay')"
         >
-            Open the letter again
+            {{ t('footer.replay') }}
         </button>
     </footer>
 </template>

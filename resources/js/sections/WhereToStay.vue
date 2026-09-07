@@ -1,4 +1,5 @@
 <script setup>
+import { useCopy } from '@/composables/useCopy'
 import { computed } from 'vue'
 import RevealSection from '@/components/RevealSection.vue'
 
@@ -10,11 +11,13 @@ const props = defineProps({
 
 // The intro carries a :code placeholder so the block code can be set in one place.
 const introParts = computed(() => (props.intro ?? '').split(':code'))
+
+const t = useCopy()
 </script>
 
 <template>
     <RevealSection class="mx-auto max-w-[1120px] px-[24px] pt-[88px]">
-        <p class="mb-[8px] text-[12px] font-medium uppercase tracking-[.3em] text-clay">Where to stay</p>
+        <p class="mb-[8px] text-[12px] font-medium uppercase tracking-[.3em] text-clay">{{ t('section.hotels') }}</p>
 
         <p class="mb-[30px] max-w-[640px] text-[17px] font-light leading-[1.7] text-ink-soft">
             {{ introParts[0]
@@ -45,7 +48,7 @@ const introParts = computed(() => (props.intro ?? '').split(':code'))
                             target="_blank"
                             rel="noopener"
                             class="border-b border-olive/40 text-[12px] font-medium uppercase tracking-[.24em] text-olive hover:border-olive-dark hover:text-olive-dark"
-                            >Book</a
+                            >{{ t('link.book') }}</a
                         >
                     </p>
                 </div>

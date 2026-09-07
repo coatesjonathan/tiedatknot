@@ -1,4 +1,5 @@
 <script setup>
+import { useCopy } from '@/composables/useCopy'
 import RevealSection from '@/components/RevealSection.vue'
 import { richText } from '@/utils/richText'
 
@@ -7,11 +8,13 @@ defineProps({
     options: { type: Array, default: () => [] },
     footnote: { type: String, default: '' },
 })
+
+const t = useCopy()
 </script>
 
 <template>
     <RevealSection class="mx-auto max-w-[1120px] px-[24px] pt-[88px]">
-        <p class="mb-[8px] text-[12px] font-medium uppercase tracking-[.3em] text-clay">Getting to Granada</p>
+        <p class="mb-[8px] text-[12px] font-medium uppercase tracking-[.3em] text-clay">{{ t('section.travel') }}</p>
         <p class="mb-[30px] max-w-[640px] text-[17px] font-light leading-[1.7] text-ink-soft">{{ intro }}</p>
 
         <!-- 2px gaps over the rule colour give hairline dividers between cards -->

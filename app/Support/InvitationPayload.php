@@ -34,6 +34,7 @@ class InvitationPayload
             'contactEmail' => $settings->contact_email,
             'animationSpeed' => $settings->animation_speed,
             'countdownEnabled' => $settings->countdown_enabled,
+            'copy' => SiteCopy::forGate(),
             'eyebrow' => trim(mb_strtoupper(
                 str($settings->location_label)->before(',')->toString().' · '.$settings->wedding_date?->format('Y')
             ), ' ·'),
@@ -43,10 +44,14 @@ class InvitationPayload
     public function invitation(Setting $settings, ?Guest $guest): array
     {
         return [
+            'copy' => SiteCopy::forInvitation(),
+
             'guest' => $guest ? [
                 'name' => $guest->name,
                 'seats' => $guest->seats,
-                'greeting' => $guest->name ? 'Dear '.$guest->name : 'You are invited',
+                'greeting' => $guest->name
+                    ? SiteCopy::line('header.greeting', ['name' => $guest->name])
+                    : SiteCopy::line('header.greeting_fallback'),
                 'seatLine' => $guest->seatLine(),
             ] : null,
 

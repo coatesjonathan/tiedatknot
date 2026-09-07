@@ -22,4 +22,5 @@ it('renders every panel page', function (string $path) {
     '/admin/faqs',
     '/admin/gallery-images',
     '/admin/manage-settings',
+    '/admin/manage-copy',
 ]);

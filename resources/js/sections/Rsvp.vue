@@ -3,8 +3,11 @@ import { computed, ref, watch } from 'vue'
 import { useForm } from '@inertiajs/vue3'
 import { store } from '@/actions/App/Http/Controllers/RsvpController'
 import RevealSection from '@/components/RevealSection.vue'
+import { useCopy } from '@/composables/useCopy'
 
 const props = defineProps({ rsvp: { type: Object, required: true } })
+
+const t = useCopy()
 
 const mailto = computed(() => `mailto:${props.rsvp.email}?subject=${encodeURIComponent(props.rsvp.subject)}`)
 
@@ -73,10 +76,10 @@ watch(
 
 const personError = (index, field) => form.errors[`party.${index}.${field}`]
 
-const answers = [
-    { value: true, label: 'Yes, count us in' },
-    { value: false, label: "Sadly we can't" },
-]
+const answers = computed(() => [
+    { value: true, label: t('rsvp.yes') },
+    { value: false, label: t('rsvp.no') },
+])
 
 const fieldClass =
     'w-full rounded-sheet border border-paper/35 bg-paper/10 px-[14px] py-[12px] text-[16px] font-light text-paper placeholder:text-paper/45 focus:border-paper/70'
@@ -85,11 +88,11 @@ const fieldClass =
 <template>
     <RevealSection id="rsvp" class="mt-[90px] bg-olive px-[24px] pb-[96px] pt-[88px] text-center">
         <p v-if="rsvp.deadlineLabel" class="m-0 text-[12px] font-medium uppercase tracking-[.3em] text-paper/70">
-            Please reply by {{ rsvp.deadlineLabel }}
+            {{ t('rsvp.deadline_prefix', { date: rsvp.deadlineLabel }) }}
         </p>
 
         <h2 class="mt-[20px] font-serif text-[clamp(38px,6vw,68px)] font-normal leading-[1.05] text-paper">
-            Will you be there?
+            {{ t('rsvp.heading') }}
         </h2>
 
         <p class="mx-auto mt-[18px] max-w-[520px] text-[17px] font-light leading-[1.7] text-paper/85">
@@ -102,11 +105,11 @@ const fieldClass =
             class="mx-auto mt-[34px] max-w-[520px] rounded-sheet border border-paper/30 bg-paper/10 px-[26px] py-[28px] text-paper"
         >
             <p class="m-0 text-[12px] font-medium uppercase tracking-[.28em] text-paper/70">
-                Replied{{ rsvp.repliedAtLabel ? ` ${rsvp.repliedAtLabel}` : '' }}
+                {{ rsvp.repliedAtLabel ? t('rsvp.replied', { date: rsvp.repliedAtLabel }) : t('rsvp.replied_undated') }}
             </p>
 
             <p class="mt-[14px] font-serif text-[26px] leading-[1.25]">
-                {{ isAttending ? "You're coming — wonderful." : "You can't make it." }}
+                {{ isAttending ? t('rsvp.confirm_attending') : t('rsvp.confirm_declined') }}
             </p>
 
             <ul v-if="isAttending && rsvp.party.length" class="m-0 mt-[18px] list-none space-y-[8px] p-0 text-left">
@@ -129,7 +132,7 @@ const fieldClass =
                 class="mt-[22px] cursor-pointer border-0 border-b border-paper/50 bg-transparent p-0 text-[13px] font-medium uppercase tracking-[.22em] text-paper"
                 @click="editing = true"
             >
-                Change your reply
+                {{ t('rsvp.change') }}
             </button>
         </div>
 
@@ -158,12 +161,16 @@ const fieldClass =
             <!-- Who is coming. The seats we saved cap the party. -->
             <div v-if="form.attending === true" class="mt-[28px]">
                 <p class="m-0 text-[12px] font-medium uppercase tracking-[.28em] text-paper/70">
-                    Who's coming
+                    {{ t('rsvp.party_heading') }}
                 </p>
 
                 <p class="mt-[8px] text-[15px] font-light leading-[1.6] text-paper/75">
-                    {{ rsvp.seats === 1 ? "We've saved a seat for you." : `We've saved ${rsvp.seats} seats for you.` }}
-                    Give us each name so we can write the place cards, and tell us about anything you can't eat.
+                    {{
+                        rsvp.seats === 1
+                            ? t('rsvp.party_seats_one')
+                            : t('rsvp.party_seats_many', { count: rsvp.seats })
+                    }}
+                    {{ t('rsvp.party_help') }}
                 </p>
 
                 <div
@@ -173,7 +180,7 @@ const fieldClass =
                 >
                     <div class="flex items-baseline justify-between gap-[12px]">
                         <label class="text-[12px] font-medium uppercase tracking-[.22em] text-paper/70">
-                            {{ index === 0 ? 'You' : `Guest ${index + 1}` }}
+                            {{ index === 0 ? t('rsvp.person_you') : t('rsvp.person_other', { number: index + 1 }) }}
                         </label>
                         <button
                             v-if="index > 0"
@@ -181,14 +188,14 @@ const fieldClass =
                             class="cursor-pointer border-0 bg-transparent p-0 text-[13px] font-light text-paper/70 underline"
                             @click="removePerson(index)"
                         >
-                            Remove
+                            {{ t('rsvp.remove') }}
                         </button>
                     </div>
 
                     <input
                         v-model="person.name"
                         type="text"
-                        :placeholder="index === 0 ? 'Your name' : 'Their full name'"
+                        :placeholder="index === 0 ? t('rsvp.name_placeholder_you') : t('rsvp.name_placeholder_other')"
                         :class="[fieldClass, 'mt-[10px]']"
                     />
                     <p v-if="personError(index, 'name')" class="mt-[6px] text-[14px] font-light text-paper">
@@ -198,7 +205,7 @@ const fieldClass =
                     <input
                         v-model="person.dietary"
                         type="text"
-                        placeholder="Dietary requirements — allergies, vegetarian, none"
+                        :placeholder="t('rsvp.dietary_placeholder')"
                         :class="[fieldClass, 'mt-[10px]']"
                     />
                     <p v-if="personError(index, 'dietary')" class="mt-[6px] text-[14px] font-light text-paper">
@@ -212,7 +219,7 @@ const fieldClass =
                     class="mt-[18px] cursor-pointer rounded-sheet border border-dashed border-paper/45 bg-transparent px-[18px] py-[12px] text-[13px] font-medium uppercase tracking-[.2em] text-paper"
                     @click="addPerson"
                 >
-                    Add someone — {{ seatsLeft }} {{ seatsLeft === 1 ? 'seat' : 'seats' }} left
+                    {{ seatsLeft === 1 ? t('rsvp.add_one') : t('rsvp.add_many', { count: seatsLeft }) }}
                 </button>
 
                 <p v-if="form.errors.party" class="mt-[12px] text-[15px] font-light text-paper">
@@ -222,13 +229,13 @@ const fieldClass =
 
             <div v-if="form.attending !== null" class="mt-[28px]">
                 <label for="rsvp-note" class="text-[12px] font-medium uppercase tracking-[.28em] text-paper/70">
-                    Anything else?
+                    {{ t('rsvp.note_label') }}
                 </label>
                 <textarea
                     id="rsvp-note"
                     v-model="form.rsvp_note"
                     rows="4"
-                    placeholder="Songs we have to play, who you'd like to sit with, when you're arriving — anything at all."
+                    :placeholder="t('rsvp.note_placeholder')"
                     :class="[fieldClass, 'mt-[10px] resize-y']"
                 ></textarea>
                 <p v-if="form.errors.rsvp_note" class="mt-[6px] text-[14px] font-light text-paper">
@@ -241,7 +248,7 @@ const fieldClass =
                 :disabled="form.processing || form.attending === null"
                 class="mt-[28px] w-full cursor-pointer rounded-sheet bg-paper px-[34px] py-[16px] text-[13px] font-medium uppercase tracking-[.26em] text-olive disabled:opacity-50"
             >
-                {{ form.processing ? 'Sending…' : replied ? 'Update our reply' : 'Send our reply' }}
+                {{ form.processing ? t('rsvp.submitting') : replied ? t('rsvp.submit_update') : t('rsvp.submit') }}
             </button>
 
             <button
@@ -250,12 +257,12 @@ const fieldClass =
                 class="mt-[14px] w-full cursor-pointer border-0 bg-transparent p-0 text-[13px] font-light text-paper/75 underline"
                 @click="editing = false"
             >
-                Never mind, keep what we said
+                {{ t('rsvp.cancel') }}
             </button>
         </form>
 
         <p class="mt-[30px] text-[15px] font-light text-paper/75">
-            Rather write to us? We're at
+            {{ t('rsvp.email_prefix') }}
             <a :href="mailto" class="border-b border-paper/50 text-paper [overflow-wrap:anywhere]">{{ rsvp.email }}</a>
         </p>
     </RevealSection>

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Support\SiteCopy;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -105,7 +106,7 @@ class Guest extends Model
     public function seatLine(): string
     {
         return $this->seats === 1
-            ? "We've saved a seat for you"
-            : "We've saved {$this->seats} seats for you";
+            ? SiteCopy::line('header.seats_one')
+            : SiteCopy::line('header.seats_many', ['count' => $this->seats]);
     }
 }

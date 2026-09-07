@@ -1,5 +1,6 @@
 <script setup>
 import { computed } from 'vue'
+import { useCopy } from '@/composables/useCopy'
 import Envelope from './Envelope.vue'
 
 const props = defineProps({
@@ -14,6 +15,8 @@ const props = defineProps({
 const emit = defineEmits(['update:email', 'submit'])
 
 const idle = computed(() => props.stage === 'gate')
+
+const t = useCopy()
 </script>
 
 <template>
@@ -41,7 +44,7 @@ const idle = computed(() => props.stage === 'gate')
             :inert="! idle"
         >
             <p class="mb-[18px] text-[16px] font-light leading-[1.6] text-ink-soft">
-                Sealed for you. Enter the email your invitation came to.
+                {{ t('gate.intro') }}
             </p>
 
             <form class="flex flex-col gap-[12px]" @submit.prevent="emit('submit')">
@@ -49,7 +52,7 @@ const idle = computed(() => props.stage === 'gate')
                     type="email"
                     name="email"
                     autocomplete="email"
-                    placeholder="you@example.com"
+                    :placeholder="t('gate.email_placeholder')"
                     :value="email"
                     class="w-full rounded-sheet border border-input-border bg-paper px-[16px] py-[15px] text-center text-[16px] text-ink"
                     @input="emit('update:email', $event.target.value)"
@@ -59,7 +62,7 @@ const idle = computed(() => props.stage === 'gate')
                     :disabled="processing"
                     class="cursor-pointer rounded-sheet bg-olive p-[15px] text-[12px] font-medium uppercase tracking-[.26em] text-paper disabled:opacity-70"
                 >
-                    Break the seal
+                    {{ t('gate.submit') }}
                 </button>
             </form>
 
@@ -68,7 +71,7 @@ const idle = computed(() => props.stage === 'gate')
             </p>
 
             <p class="text-[14px] font-light text-ink-faint">
-                Not recognised? Write to
+                {{ t('gate.help_prefix') }}
                 <a
                     :href="`mailto:${site.contactEmail}`"
                     class="border-b border-olive/40 text-olive hover:border-olive-dark hover:text-olive-dark"
