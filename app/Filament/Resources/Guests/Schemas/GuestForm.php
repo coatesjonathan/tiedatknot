@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\Guests\Schemas;
 
+use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
@@ -31,6 +32,7 @@ class GuestForm
                             ->maxLength(255),
                         TextInput::make('seats')
                             ->label('Seats saved')
+                            ->helperText('How many people this invitation covers.')
                             ->required()
                             ->numeric()
                             ->minValue(1)
@@ -39,7 +41,7 @@ class GuestForm
                     ]),
 
                 Section::make('Reply')
-                    ->description('Record replies here as they come in by email.')
+                    ->description('Replies arrive from the site — edit here if someone tells you in person.')
                     ->columns(2)
                     ->schema([
                         Select::make('rsvp_status')
@@ -51,11 +53,30 @@ class GuestForm
                             ])
                             ->default('pending')
                             ->required(),
-                        Textarea::make('dietary')
-                            ->label('Dietary notes')
-                            ->rows(2),
+                        TextInput::make('attending_count')
+                            ->label('Seats taken')
+                            ->numeric()
+                            ->minValue(0)
+                            ->maxValue(20)
+                            ->placeholder('Not replied yet'),
+                        Repeater::make('attendees')
+                            ->label('Who is coming')
+                            ->relationship()
+                            ->orderColumn('sort_order')
+                            ->columns(2)
+                            ->addActionLabel('Add someone')
+                            ->itemLabel(fn (array $state): ?string => $state['name'] ?? null)
+                            ->schema([
+                                TextInput::make('name')
+                                    ->required()
+                                    ->maxLength(120),
+                                TextInput::make('dietary')
+                                    ->label('Dietary requirements')
+                                    ->maxLength(500),
+                            ])
+                            ->columnSpanFull(),
                         Textarea::make('rsvp_note')
-                            ->label('Their reply')
+                            ->label('Their message')
                             ->rows(3)
                             ->columnSpanFull(),
                         Textarea::make('notes')

@@ -35,6 +35,6 @@ class InvitationController extends Controller
     {
         $id = $request->session()->get('guest_id');
 
-        return $id ? Guest::find($id) : null;
+        return $id ? Guest::with('attendees')->find($id) : null;
     }
 }

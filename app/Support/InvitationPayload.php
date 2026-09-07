@@ -96,6 +96,12 @@ class InvitationPayload
                 'body' => $settings->rsvp_body,
                 'email' => $settings->contact_email,
                 'subject' => 'RSVP — '.$settings->couple_names.', '.$settings->wedding_date?->format('j F Y'),
+                'seats' => $guest?->seats ?? 1,
+                'guestName' => $guest?->name,
+                'status' => $guest?->rsvp_status ?? 'pending',
+                'party' => $guest?->partyForForm() ?? [],
+                'note' => $guest?->rsvp_note,
+                'repliedAtLabel' => $guest?->rsvp_submitted_at?->format('j F Y'),
             ],
 
             'honeymoonUrl' => $settings->honeymoon_url,

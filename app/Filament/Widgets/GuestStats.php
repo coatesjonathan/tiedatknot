@@ -15,7 +15,7 @@ class GuestStats extends StatsOverviewWidget
         $attending = Guest::where('rsvp_status', 'attending')->count();
         $declined = Guest::where('rsvp_status', 'declined')->count();
         $pending = Guest::where('rsvp_status', 'pending')->count();
-        $seats = Guest::where('rsvp_status', 'attending')->sum('seats');
+        $seats = Guest::where('rsvp_status', 'attending')->sum('attending_count');
 
         return [
             Stat::make('Invited', $invited)
