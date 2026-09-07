@@ -1,0 +1,95 @@
+@import 'tailwindcss';
+
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+
+/* ---------------------------------------------------------------------------
+   Design tokens — Jenny & Jonny, Granada 2027
+   Mirrors the token table in the design handoff.
+--------------------------------------------------------------------------- */
+@theme {
+    --font-sans: 'Jost', system-ui, sans-serif;
+    --font-serif: 'Instrument Serif', Georgia, serif;
+
+    --color-sand: #e9d3b8;
+    --color-sand-deep: #e3cdb0;
+    --color-cream: #efdfc8;
+    --color-card: #f6ead6;
+    --color-paper: #fdf6ea;
+    --color-paper-light: #fffdf7;
+    --color-paper-mid: #f6ebda;
+
+    --color-terracotta: #b0492b;
+    --color-terracotta-dark: #8c3d28;
+    --color-wax-mid: #a84025;
+    --color-wax-deep: #87331f;
+    --color-wax-outer: #682a19;
+    --color-wax-residue: #4a1a0c;
+
+    --color-clay: #a7714a;
+    --color-ink: #332a22;
+    --color-ink-soft: #5d4a3a;
+    --color-ink-muted: #7a6553;
+    --color-ink-faint: #8a7361;
+    --color-ink-ghost: #9a8471;
+    --color-rule: #ddc4a4;
+    --color-input-border: #d8bd9c;
+
+    --radius-sheet: 2px;
+    --radius-envelope: 3px;
+
+    --animate-float: float 8s ease-in-out infinite;
+
+    @keyframes float {
+        0%,
+        100% {
+            transform: translateY(0);
+        }
+        50% {
+            transform: translateY(-7px);
+        }
+    }
+}
+
+@layer base {
+    html,
+    body {
+        margin: 0;
+        padding: 0;
+    }
+
+    input:focus,
+    textarea:focus {
+        outline: none;
+    }
+
+    summary {
+        list-style: none;
+        cursor: pointer;
+    }
+
+    summary::-webkit-details-marker {
+        display: none;
+    }
+}
+
+/* Paper grain: two tiling feTurbulence textures, multiplied over the surface. */
+@utility grain {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    mix-blend-mode: multiply;
+    opacity: 0.42;
+    background-size: 170px 170px;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='170' height='170'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/></filter><rect width='170' height='170' filter='url(%23n)' opacity='0.5'/></svg>");
+}
+
+@utility grain-soft {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    mix-blend-mode: multiply;
+    opacity: 0.22;
+    background-size: 150px 150px;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='150' height='150'><filter id='m'><feTurbulence type='fractalNoise' baseFrequency='1.1' numOctaves='3' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/></filter><rect width='150' height='150' filter='url(%23m)' opacity='0.45'/></svg>");
+}
