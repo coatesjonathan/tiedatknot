@@ -17,17 +17,20 @@ const t = useCopy()
                     {{ venue.name }}
                 </h2>
 
-                <p class="mt-[18px] text-[17px] font-light leading-[1.7] text-ink-soft text-pretty">
-                    {{ venue.description }}
-                </p>
+                <div
+                    class="rich mt-[18px] text-[17px] font-light leading-[1.7] text-ink-soft text-pretty"
+                    v-html="venue.description"
+                ></div>
 
                 <p class="mt-[20px] whitespace-pre-line text-[16px] font-light leading-[1.7] text-ink-muted">
                     {{ venue.address }}
                 </p>
 
-                <p v-if="venue.travelNote" class="mt-[16px] text-[16px] font-light leading-[1.7] text-ink-muted">
-                    {{ venue.travelNote }}
-                </p>
+                <div
+                    v-if="venue.travelNote"
+                    class="rich mt-[16px] text-[16px] font-light leading-[1.7] text-ink-muted"
+                    v-html="venue.travelNote"
+                ></div>
 
                 <p v-if="venue.mapsUrl" class="mt-[22px]">
                     <a

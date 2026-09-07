@@ -7,6 +7,7 @@ use BackedEnum;
 use Filament\Actions\Action;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
@@ -65,9 +66,9 @@ class ManageSettings extends Page
                     ->schema([
                         TextInput::make('venue_name')->required(),
                         TextInput::make('maps_url')->label('Maps link')->url(),
-                        Textarea::make('venue_description')->rows(3)->columnSpanFull(),
+                        RichEditor::make('venue_description')->columnSpanFull(),
                         Textarea::make('venue_address')->rows(2),
-                        Textarea::make('venue_travel_note')->label('Getting there note')->rows(2),
+                        RichEditor::make('venue_travel_note')->label('Getting there note')->columnSpanFull(),
                         FileUpload::make('venue_image_path')
                             ->label('Venue photo')
                             ->image()
@@ -82,14 +83,13 @@ class ManageSettings extends Page
 
                 Section::make('Copy')
                     ->schema([
-                        Textarea::make('pull_quote')->rows(3),
-                        Textarea::make('schedule_footnote')->rows(2),
-                        Textarea::make('travel_intro')->rows(3),
-                        Textarea::make('travel_footnote')->rows(2),
-                        Textarea::make('hotels_intro')
-                            ->rows(3)
+                        RichEditor::make('pull_quote'),
+                        RichEditor::make('schedule_footnote'),
+                        RichEditor::make('travel_intro'),
+                        RichEditor::make('travel_footnote'),
+                        RichEditor::make('hotels_intro')
                             ->helperText('Write :code where the hotel block code should appear.'),
-                        Textarea::make('rsvp_body')->label('RSVP explainer')->rows(3),
+                        RichEditor::make('rsvp_body')->label('RSVP explainer'),
                     ]),
 
                 Section::make('Replies and extras')

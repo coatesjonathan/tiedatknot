@@ -95,9 +95,10 @@ const fieldClass =
             {{ t('rsvp.heading') }}
         </h2>
 
-        <p class="mx-auto mt-[18px] max-w-[520px] text-[17px] font-light leading-[1.7] text-paper/85">
-            {{ rsvp.body }}
-        </p>
+        <div
+            class="rich mx-auto mt-[18px] max-w-[520px] text-[17px] font-light leading-[1.7] text-paper/85"
+            v-html="rsvp.body"
+        ></div>
 
         <!-- What we have on file, once they have replied. -->
         <div

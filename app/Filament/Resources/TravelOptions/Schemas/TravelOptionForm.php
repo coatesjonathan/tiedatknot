@@ -2,10 +2,10 @@
 
 namespace App\Filament\Resources\TravelOptions\Schemas;
 
-use Filament\Schemas\Schema;
+use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\TextInput;
-use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\Toggle;
+use Filament\Schemas\Schema;
 
 class TravelOptionForm
 {
@@ -21,12 +21,11 @@ class TravelOptionForm
                 TextInput::make('title')
                     ->required()
                     ->maxLength(255),
-                Textarea::make('body')
+                RichEditor::make('body')
                     ->required()
-                    ->rows(4)
                     ->columnSpanFull(),
-                Textarea::make('footnote')
-                    ->helperText('Markdown links are allowed: [renfe.com](https://renfe.com)')
+                RichEditor::make('footnote')
+                    ->helperText('Use the link button to point at a booking site.')
                     ->rows(2)
                     ->columnSpanFull(),
                 Toggle::make('is_published')

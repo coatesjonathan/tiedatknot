@@ -6,6 +6,9 @@ defineProps({ quote: { type: String, default: '' } })
 
 <template>
     <RevealSection class="mx-auto max-w-[720px] px-[24px] pt-[80px] text-center">
-        <p class="m-0 font-serif text-[clamp(24px,3vw,34px)] leading-[1.4] text-ink text-pretty">{{ quote }}</p>
+        <div
+            class="rich m-0 font-serif text-[clamp(24px,3vw,34px)] leading-[1.4] text-ink text-pretty"
+            v-html="quote"
+        ></div>
     </RevealSection>
 </template>

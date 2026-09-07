@@ -29,6 +29,6 @@ const t = useCopy()
             </div>
         </div>
 
-        <p v-if="footnote" class="mt-[14px] text-[14px] font-light italic text-ink-ghost">{{ footnote }}</p>
+        <div v-if="footnote" class="rich mt-[14px] text-[14px] font-light italic text-ink-ghost" v-html="footnote"></div>
     </RevealSection>
 </template>

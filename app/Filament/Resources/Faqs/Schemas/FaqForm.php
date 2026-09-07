@@ -2,10 +2,10 @@
 
 namespace App\Filament\Resources\Faqs\Schemas;
 
-use Filament\Schemas\Schema;
+use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\TextInput;
-use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\Toggle;
+use Filament\Schemas\Schema;
 
 class FaqForm
 {
@@ -17,9 +17,8 @@ class FaqForm
                     ->required()
                     ->maxLength(255)
                     ->columnSpanFull(),
-                Textarea::make('answer')
+                RichEditor::make('answer')
                     ->required()
-                    ->rows(4)
                     ->columnSpanFull(),
                 Toggle::make('is_published')
                     ->label('Show on the invitation')

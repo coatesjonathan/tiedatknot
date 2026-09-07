@@ -20,6 +20,13 @@ function viewInvitation(): TestResponse
     return test()->withSession(['guest_id' => unlockedGuest()->id])->get('/');
 }
 
+it('numbers the default sections in page order', function () {
+    $orders = array_column(PageSections::defaults(), 'sort_order');
+
+    expect($orders)->toBe(range(0, count(PageSections::ALL) - 1));
+    expect(array_column(PageSections::defaults(), 'anchor'))->toBe(PageSections::anchors());
+});
+
 it('seeds a row for every section, shown and in the menu', function () {
     expect(SiteSection::count())->toBe(count(PageSections::ALL));
     expect(SiteSection::orderBy('sort_order')->pluck('anchor')->all())->toBe(PageSections::anchors());

@@ -58,30 +58,35 @@ class InvitationPayload
                 'seatLine' => $guest->seatLine(),
             ] : null,
 
-            'pullQuote' => $settings->pull_quote,
+            'pullQuote' => RichText::html($settings->pull_quote),
             'heroImage' => $this->url($settings->hero_image_path),
             'venue' => [
                 'name' => $settings->venue_name,
-                'description' => $settings->venue_description,
+                'description' => RichText::html($settings->venue_description),
                 'address' => $settings->venue_address,
-                'travelNote' => $settings->venue_travel_note,
+                'travelNote' => RichText::html($settings->venue_travel_note),
                 'mapsUrl' => $settings->maps_url,
                 'image' => $this->url($settings->venue_image_path),
             ],
 
             'schedule' => ScheduleItem::published()->get(['time', 'title', 'detail']),
-            'scheduleFootnote' => $settings->schedule_footnote,
+            'scheduleFootnote' => RichText::html($settings->schedule_footnote),
 
-            'travelIntro' => $settings->travel_intro,
-            'travelFootnote' => $settings->travel_footnote,
-            'travelOptions' => TravelOption::published()->get(['label', 'title', 'body', 'footnote']),
+            'travelIntro' => RichText::html($settings->travel_intro),
+            'travelFootnote' => RichText::html($settings->travel_footnote),
+            'travelOptions' => TravelOption::published()->get()->map(fn (TravelOption $option) => [
+                'label' => $option->label,
+                'title' => $option->title,
+                'body' => RichText::html($option->body),
+                'footnote' => RichText::html($option->footnote),
+            ])->values(),
 
-            'hotelsIntro' => $settings->hotels_intro,
+            'hotelsIntro' => RichText::html($settings->hotels_intro),
             'blockCode' => $settings->block_code,
             'hotels' => Hotel::published()->get()->map(fn (Hotel $hotel) => [
                 'label' => $hotel->label,
                 'name' => $hotel->name,
-                'description' => $hotel->description,
+                'description' => RichText::html($hotel->description),
                 'rate' => $hotel->rate,
                 'roomsHeld' => $hotel->rooms_held,
                 'releaseDate' => $hotel->release_date?->format('j M Y'),
@@ -89,9 +94,18 @@ class InvitationPayload
                 'image' => $this->url($hotel->image_path),
             ])->values(),
 
-            'highlights' => Highlight::published()->get(['title', 'body']),
-            'notes' => Note::published()->get(['title', 'body']),
-            'faqs' => Faq::published()->get(['question', 'answer']),
+            'highlights' => Highlight::published()->get()->map(fn (Highlight $highlight) => [
+                'title' => $highlight->title,
+                'body' => RichText::html($highlight->body),
+            ])->values(),
+            'notes' => Note::published()->get()->map(fn (Note $note) => [
+                'title' => $note->title,
+                'body' => RichText::html($note->body),
+            ])->values(),
+            'faqs' => Faq::published()->get()->map(fn (Faq $faq) => [
+                'question' => $faq->question,
+                'answer' => RichText::html($faq->answer),
+            ])->values(),
 
             'gallery' => GalleryImage::published()->get()->map(fn (GalleryImage $image) => [
                 'image' => $this->url($image->image_path),
@@ -101,7 +115,7 @@ class InvitationPayload
 
             'rsvp' => [
                 'deadlineLabel' => $settings->rsvp_deadline?->format('j F Y'),
-                'body' => $settings->rsvp_body,
+                'body' => RichText::html($settings->rsvp_body),
                 'email' => $settings->contact_email,
                 'subject' => 'RSVP — '.$settings->couple_names.', '.$settings->wedding_date?->format('j F Y'),
                 'seats' => $guest?->seats ?? 1,

@@ -14,7 +14,7 @@ const t = useCopy()
         <div class="grid gap-[34px] [grid-template-columns:repeat(auto-fit,minmax(230px,1fr))]">
             <div v-for="item in highlights" :key="item.title">
                 <h3 class="m-0 font-serif text-[26px] font-normal text-ink">{{ item.title }}</h3>
-                <p class="mt-[8px] text-[16px] font-light leading-[1.7] text-ink-soft">{{ item.body }}</p>
+                <div class="rich mt-[8px] text-[16px] font-light leading-[1.7] text-ink-soft" v-html="item.body"></div>
             </div>
         </div>
     </RevealSection>

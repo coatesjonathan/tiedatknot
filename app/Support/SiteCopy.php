@@ -66,6 +66,7 @@ class SiteCopy
             'section.questions' => ['sections', 'FAQs', 'Questions', 1],
             'link.maps' => ['sections', 'Maps link', 'Open in maps', 1],
             'link.book' => ['sections', 'Hotel booking link', 'Book', 1],
+            'hotels.release' => ['sections', 'Hotel room release date', 'Release :date', 1],
 
             // ---- The RSVP form -------------------------------------------
             'rsvp.deadline_prefix' => ['rsvp', 'Reply-by line', 'Please reply by :date', 1],

@@ -2,10 +2,10 @@
 
 namespace App\Filament\Resources\Highlights\Schemas;
 
-use Filament\Schemas\Schema;
+use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\TextInput;
-use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\Toggle;
+use Filament\Schemas\Schema;
 
 class HighlightForm
 {
@@ -16,9 +16,8 @@ class HighlightForm
                 TextInput::make('title')
                     ->required()
                     ->maxLength(255),
-                Textarea::make('body')
+                RichEditor::make('body')
                     ->required()
-                    ->rows(3)
                     ->columnSpanFull(),
                 Toggle::make('is_published')
                     ->label('Show on the invitation')

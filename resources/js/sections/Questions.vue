@@ -1,7 +1,6 @@
 <script setup>
 import { useCopy } from '@/composables/useCopy'
 import RevealSection from '@/components/RevealSection.vue'
-import { richText } from '@/utils/richText'
 
 defineProps({ faqs: { type: Array, default: () => [] } })
 
@@ -25,7 +24,7 @@ const t = useCopy()
                     >+</span
                 >
             </summary>
-            <p class="mb-[22px] text-[16px] font-light leading-[1.7] text-ink-soft" v-html="richText(faq.answer)"></p>
+            <div class="rich mb-[22px] text-[16px] font-light leading-[1.7] text-ink-soft" v-html="faq.answer"></div>
         </details>
     </RevealSection>
 </template>

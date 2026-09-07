@@ -78,6 +78,54 @@
     }
 }
 
+/* Formatted copy from the admin's editor, kept inside the site's typography. */
+@utility rich {
+    & > p {
+        margin: 0 0 0.85em;
+    }
+
+    & > p:last-child {
+        margin-bottom: 0;
+    }
+
+    & strong {
+        font-weight: 500;
+        color: var(--color-ink);
+    }
+
+    & em {
+        font-style: italic;
+    }
+
+    & ul,
+    & ol {
+        margin: 0.6em 0;
+        padding-left: 1.25em;
+    }
+
+    & ul {
+        list-style: disc;
+    }
+
+    & ol {
+        list-style: decimal;
+    }
+
+    & li {
+        margin: 0.25em 0;
+    }
+
+    & a {
+        color: var(--color-olive);
+        border-bottom: 1px solid color-mix(in srgb, var(--color-olive) 40%, transparent);
+    }
+
+    & a:hover {
+        color: var(--color-olive-dark);
+        border-bottom-color: var(--color-olive-dark);
+    }
+}
+
 /* Paper grain: two tiling feTurbulence textures, multiplied over the surface. */
 @utility grain {
     position: absolute;

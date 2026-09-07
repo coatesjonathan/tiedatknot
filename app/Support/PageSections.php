@@ -36,14 +36,18 @@ class PageSections
     /** The rows the site starts life with: everything on, in page order. */
     public static function defaults(): array
     {
-        $sort = 0;
+        $rows = [];
 
-        return array_map(fn (string $anchor, string $label) => [
-            'anchor' => $anchor,
-            'label' => $label,
-            'is_published' => true,
-            'in_menu' => true,
-            'sort_order' => $sort++,
-        ], array_keys(self::ALL), array_values(self::ALL));
+        foreach (array_values(self::anchors()) as $index => $anchor) {
+            $rows[] = [
+                'anchor' => $anchor,
+                'label' => self::ALL[$anchor],
+                'is_published' => true,
+                'in_menu' => true,
+                'sort_order' => $index,
+            ];
+        }
+
+        return $rows;
     }
 }
