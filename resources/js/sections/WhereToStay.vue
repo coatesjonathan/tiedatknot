@@ -29,7 +29,7 @@ const introParts = computed(() => (props.intro ?? '').split(':code'))
                 </div>
 
                 <div class="px-[24px] pb-[28px] pt-[26px]">
-                    <p class="m-0 text-[11px] font-medium uppercase tracking-[.26em] text-terracotta">{{ hotel.label }}</p>
+                    <p class="m-0 text-[11px] font-medium uppercase tracking-[.26em] text-olive">{{ hotel.label }}</p>
                     <h3 class="mt-[10px] font-serif text-[28px] font-normal text-ink">{{ hotel.name }}</h3>
                     <p class="mt-[10px] text-[16px] font-light leading-[1.65] text-ink-soft">{{ hotel.description }}</p>
 
@@ -44,7 +44,7 @@ const introParts = computed(() => (props.intro ?? '').split(':code'))
                             :href="hotel.bookingUrl"
                             target="_blank"
                             rel="noopener"
-                            class="border-b border-terracotta/40 text-[12px] font-medium uppercase tracking-[.24em] text-terracotta hover:border-terracotta-dark hover:text-terracotta-dark"
+                            class="border-b border-olive/40 text-[12px] font-medium uppercase tracking-[.24em] text-olive hover:border-olive-dark hover:text-olive-dark"
                             >Book</a
                         >
                     </p>

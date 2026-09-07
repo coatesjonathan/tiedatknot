@@ -1,21 +1,22 @@
 import { computed, onBeforeUnmount, ref } from 'vue'
 
-/** The nine stages, in the order they run. */
-const ORDER = ['gate', 'crack', 'split', 'peel', 'swing', 'rise', 'unfold', 'lift', 'fade', 'open']
+/** The stages, in the order they run. */
+const ORDER = ['gate', 'crack', 'split', 'peel', 'swing', 'rise', 'draw', 'unfold', 'lift', 'fade', 'open']
 
 /** Every delay is multiplied by the speed factor for the chosen tempo. */
 const SPEEDS = { quick: 0.75, full: 1, cinematic: 1.35 }
 
 /** Timeline in milliseconds at ×1.0, exactly as specced in the handoff. */
 const TIMELINE = [
-    [340, 'split'],
-    [760, 'peel'],
-    [1120, 'swing'],
-    [1820, 'rise'],
-    [3060, 'unfold'],
-    [3960, 'lift'],
-    [4420, 'fade'],
-    [5020, 'open'],
+    [480, 'split'],
+    [880, 'peel'],
+    [1240, 'swing'],
+    [1900, 'rise'],
+    [2600, 'draw'],
+    [3500, 'unfold'],
+    [4400, 'lift'],
+    [4860, 'fade'],
+    [5460, 'open'],
 ]
 
 const prefersReducedMotion = () =>
@@ -95,41 +96,90 @@ export function useEnvelopeSequence(speed = 'quick', startOpen = false) {
             flapDeg: past('swing') ? -179 : past('peel') ? -15 : 0,
             flapShadow: past('rise') ? 0 : past('peel') ? 1 : 0,
 
-            letterZ: past('rise') ? 9 : 2,
-            letterY: past('lift') ? '-40%' : past('unfold') ? '-38%' : past('rise') ? '-52%' : '0%',
-            letterTilt: past('lift') ? 0 : past('unfold') ? -3 : past('rise') ? -9 : 0,
-            letterStretch: past('unfold') ? 1 : past('rise') ? 1.03 : 1,
+            // The letter sits at z-2, behind the pocket front (z-3), so the part
+            // still inside the envelope is genuinely hidden by the paper in
+            // front of it. It only clears to the top once it is fully drawn out.
+            letterZ: past('unfold') ? 9 : 2,
+            // The envelope is a preserve-3d scene, so paint order follows real
+            // depth, not z-index. Park the letter behind the pocket front's
+            // plane while it is inside, and bring it forward once it is out.
+            letterDepth: past('unfold') ? 18 : -10,
+            // -60% leaves the card straddling the mouth — half out, half still
+            // in the pocket — before -88% draws it fully clear to unfold.
+            letterY: past('lift')
+                ? '-80%'
+                : past('unfold')
+                  ? '-84%'
+                  : past('draw')
+                    ? '-88%'
+                    : past('rise')
+                      ? '-60%'
+                      : '0%',
+            letterTilt: past('lift') ? 0 : past('unfold') ? -3 : past('rise') ? -7 : 0,
+            letterStretch: past('unfold') ? 1 : past('rise') ? 1.02 : 1,
             letterScale: past('lift') ? 1.06 : 1,
             letterShadow: past('rise')
-                ? '0 24px 38px -22px rgba(80,45,25,.5)'
-                : '0 2px 5px -3px rgba(80,45,25,.35)',
-            panelOpacity: past('rise') ? 1 : 0,
+                ? '0 24px 38px -22px rgba(39,51,37,.5)'
+                : '0 2px 5px -3px rgba(39,51,37,.35)',
+            // The folded panels rotate out of the letter's plane, so while the
+            // card is still in the pocket they would poke through the envelope
+            // front in 3D. They only join once the letter has cleared the mouth.
+            panelOpacity: past('draw') ? 1 : 0,
             foldTop: past('unfold') ? 0 : 91,
             foldBot: past('unfold') ? 0 : -92,
+
+            // Once the flap is flat back, it drops below the letter so the
+            // paper draws over it as it comes up out of the mouth.
+            flapZ: past('rise') ? 1 : 6,
 
             mouthShadow: past('lift') ? 0 : past('rise') ? 1 : 0,
             lipOpacity: past('lift') ? 0 : past('peel') ? 1 : 0,
 
-            sealBot: 'translateZ(4px) rotate(-11deg)',
+            // The seal presses square on the flap — the monogram reads upright.
+            // It swells a touch while the cracks run, then gives.
+            sealBot: cracked ? 'translateZ(4px) scale(1)' : past('crack') ? 'translateZ(4px) scale(1.035)' : 'translateZ(4px) scale(1)',
             sealBotOpacity: past('lift') ? 0 : 1,
+
+            // The top piece rides up and away with the flap; the two lower
+            // pieces break free, then drop off the envelope under gravity.
             shardT: past('peel')
-                ? 'translate(-13px,-26px) rotate(-22deg)'
+                ? 'translate(-17px,-38px) rotate(-34deg) scale(.94)'
                 : cracked
-                  ? 'translate(-2px,-6px) rotate(-4deg)'
+                  ? 'translate(-3px,-9px) rotate(-7deg)'
                   : 'none',
             shardTOpacity: past('swing') ? 0 : 1,
-            shardL: cracked ? 'translate(-7px,5px) rotate(-11deg)' : 'none',
-            shardR: cracked ? 'translate(7px,7px) rotate(9deg)' : 'none',
+            shardL: past('swing')
+                ? 'translate(-27px,74px) rotate(-56deg) scale(.92)'
+                : cracked
+                  ? 'translate(-9px,6px) rotate(-14deg)'
+                  : 'none',
+            shardR: past('swing')
+                ? 'translate(29px,80px) rotate(62deg) scale(.92)'
+                : cracked
+                  ? 'translate(9px,8px) rotate(12deg)'
+                  : 'none',
+            shardLROpacity: past('rise') ? 0 : 1,
+
+            // Crisp snap on the break, then a gravity curve as they fall away.
+            shardTrans: past('swing')
+                ? 'transform 820ms cubic-bezier(.42,0,.86,.44), opacity 620ms ease-in 200ms'
+                : 'transform 560ms cubic-bezier(.2,.92,.28,1), opacity 400ms ease',
+
             waxBaseOpacity: cracked ? 0 : 1,
-            crackOpacity: past('crack') ? 1 : 0,
+            // Wax left clinging to the paper: it shows in the gaps as the pieces
+            // part, then goes with them rather than sitting there as a blot.
+            residueOpacity: past('swing') ? 0 : cracked ? 0.58 : 0,
+            // The hairlines only exist while the wax is still whole — once it
+            // gives, the shard edges are the break.
+            crackOpacity: cracked ? 0 : past('crack') ? 1 : 0,
             crackDash: past('crack') ? 0 : 120,
             crackDash2: past('crack') ? 0 : 70,
 
             chipsOpacity: cracked ? 0 : 1,
-            chipA: cracked ? 'translateZ(6px) translate(-34px,52px) rotate(-140deg)' : 'translateZ(6px)',
-            chipB: cracked ? 'translateZ(6px) translate(30px,58px) rotate(120deg)' : 'translateZ(6px)',
-            chipC: cracked ? 'translateZ(6px) translate(-12px,64px) rotate(-80deg)' : 'translateZ(6px)',
-            chipD: cracked ? 'translateZ(6px) translate(18px,46px) rotate(96deg)' : 'translateZ(6px)',
+            chipA: cracked ? 'translateZ(6px) translate(-41px,63px) rotate(-190deg)' : 'translateZ(6px)',
+            chipB: cracked ? 'translateZ(6px) translate(37px,69px) rotate(165deg)' : 'translateZ(6px)',
+            chipC: cracked ? 'translateZ(6px) translate(-14px,77px) rotate(-110deg)' : 'translateZ(6px)',
+            chipD: cracked ? 'translateZ(6px) translate(23px,55px) rotate(128deg)' : 'translateZ(6px)',
         }
     })
 

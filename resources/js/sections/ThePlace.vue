@@ -31,7 +31,7 @@ defineProps({ venue: { type: Object, required: true } })
                         :href="venue.mapsUrl"
                         target="_blank"
                         rel="noopener"
-                        class="border-b border-terracotta/40 text-[12px] font-medium uppercase tracking-[.26em] text-terracotta hover:border-terracotta-dark hover:text-terracotta-dark"
+                        class="border-b border-olive/40 text-[12px] font-medium uppercase tracking-[.26em] text-olive hover:border-olive-dark hover:text-olive-dark"
                         >Open in maps</a
                     >
                 </p>

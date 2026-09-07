@@ -24,7 +24,7 @@ const idle = computed(() => props.stage === 'gate')
     >
         <!-- Soft vignette behind the envelope -->
         <div
-            class="pointer-events-none absolute left-1/2 top-1/2 size-[min(660px,86vw)] -translate-x-1/2 -translate-y-1/2 rounded-full bg-cream"
+            class="pointer-events-none absolute left-1/2 top-1/2 size-[min(660px,86vw)] -translate-x-1/2 -translate-y-1/2 rounded-full bg-card"
         ></div>
 
         <p
@@ -57,13 +57,13 @@ const idle = computed(() => props.stage === 'gate')
                 <button
                     type="submit"
                     :disabled="processing"
-                    class="cursor-pointer rounded-sheet bg-terracotta p-[15px] text-[12px] font-medium uppercase tracking-[.26em] text-paper disabled:opacity-70"
+                    class="cursor-pointer rounded-sheet bg-olive p-[15px] text-[12px] font-medium uppercase tracking-[.26em] text-paper disabled:opacity-70"
                 >
                     Break the seal
                 </button>
             </form>
 
-            <p class="mt-[14px] min-h-[34px] text-[15px] font-light leading-[1.5] text-terracotta-dark">
+            <p class="mt-[14px] min-h-[34px] text-[15px] font-light leading-[1.5] text-olive-dark">
                 {{ error }}
             </p>
 
@@ -71,7 +71,7 @@ const idle = computed(() => props.stage === 'gate')
                 Not recognised? Write to
                 <a
                     :href="`mailto:${site.contactEmail}`"
-                    class="border-b border-terracotta/40 text-terracotta hover:border-terracotta-dark hover:text-terracotta-dark"
+                    class="border-b border-olive/40 text-olive hover:border-olive-dark hover:text-olive-dark"
                     >{{ site.contactEmail }}</a
                 >
             </p>

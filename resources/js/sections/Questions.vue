@@ -18,7 +18,7 @@ defineProps({ faqs: { type: Array, default: () => [] } })
             <summary class="flex items-center justify-between gap-[16px] py-[20px] text-[19px] text-ink">
                 {{ faq.question }}
                 <span
-                    class="font-serif text-[22px] text-terracotta transition-transform duration-[250ms] ease-[ease] group-open:rotate-45"
+                    class="font-serif text-[22px] text-olive transition-transform duration-[250ms] ease-[ease] group-open:rotate-45"
                     >+</span
                 >
             </summary>

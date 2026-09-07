@@ -4,36 +4,36 @@
 @source '../../storage/framework/views/*.php';
 
 /* ---------------------------------------------------------------------------
-   Design tokens — Jenny & Jonny, Granada 2027
+   Design tokens — Jenny & Jonny, Granada 2027 (olive)
    Mirrors the token table in the design handoff.
 --------------------------------------------------------------------------- */
 @theme {
     --font-sans: 'Jost', system-ui, sans-serif;
     --font-serif: 'Instrument Serif', Georgia, serif;
 
-    --color-sand: #e9d3b8;
-    --color-sand-deep: #e3cdb0;
-    --color-cream: #efdfc8;
-    --color-card: #f6ead6;
-    --color-paper: #fdf6ea;
-    --color-paper-light: #fffdf7;
-    --color-paper-mid: #f6ebda;
+    --color-sand: #f2efeb;
+    --color-sand-deep: #e3dfd9;
+    --color-cream: #f2efeb;
+    --color-card: #f5f3f0;
+    --color-paper: #faf8f6;
+    --color-paper-light: #fdfcfb;
+    --color-paper-mid: #f4f1ee;
 
-    --color-terracotta: #b0492b;
-    --color-terracotta-dark: #8c3d28;
-    --color-wax-mid: #a84025;
-    --color-wax-deep: #87331f;
-    --color-wax-outer: #682a19;
-    --color-wax-residue: #4a1a0c;
+    --color-olive: #688662;
+    --color-olive-dark: #495f45;
+    --color-wax-mid: #6d8a67;
+    --color-wax-deep: #55704f;
+    --color-wax-outer: #3d5138;
+    --color-wax-residue: #253320;
 
-    --color-clay: #a7714a;
-    --color-ink: #332a22;
-    --color-ink-soft: #5d4a3a;
-    --color-ink-muted: #7a6553;
-    --color-ink-faint: #8a7361;
-    --color-ink-ghost: #9a8471;
-    --color-rule: #ddc4a4;
-    --color-input-border: #d8bd9c;
+    --color-clay: #5f7a59;
+    --color-ink: #2a2620;
+    --color-ink-soft: #494239;
+    --color-ink-muted: #665e54;
+    --color-ink-faint: #786f64;
+    --color-ink-ghost: #8c8275;
+    --color-rule: #dad5cd;
+    --color-input-border: #d1cac2;
 
     --radius-sheet: 2px;
     --radius-envelope: 3px;

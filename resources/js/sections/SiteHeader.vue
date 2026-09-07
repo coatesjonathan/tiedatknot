@@ -18,7 +18,7 @@ const countdown = useCountdown(props.site)
         <h1
             class="mt-[22px] font-serif text-[clamp(56px,11vw,130px)] font-normal leading-[.95] tracking-[-.01em] text-ink"
         >
-            {{ site.firstName }}<span class="block italic text-terracotta">&amp; {{ site.secondName }}</span>
+            {{ site.firstName }}<span class="block italic text-olive">&amp; {{ site.secondName }}</span>
         </h1>
 
         <p class="mt-[30px] text-[15px] uppercase tracking-[.28em] text-ink-soft">
@@ -29,6 +29,6 @@ const countdown = useCountdown(props.site)
             {{ site.venueName }}<template v-if="countdown"> · {{ countdown }}</template>
         </p>
 
-        <p v-if="guest?.seatLine" class="mt-[6px] text-[16px] font-light text-terracotta">{{ guest.seatLine }}</p>
+        <p v-if="guest?.seatLine" class="mt-[6px] text-[16px] font-light text-olive">{{ guest.seatLine }}</p>
     </header>
 </template>

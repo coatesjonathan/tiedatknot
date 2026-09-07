@@ -83,7 +83,7 @@ const fieldClass =
 </script>
 
 <template>
-    <RevealSection id="rsvp" class="mt-[90px] bg-terracotta px-[24px] pb-[96px] pt-[88px] text-center">
+    <RevealSection id="rsvp" class="mt-[90px] bg-olive px-[24px] pb-[96px] pt-[88px] text-center">
         <p v-if="rsvp.deadlineLabel" class="m-0 text-[12px] font-medium uppercase tracking-[.3em] text-paper/70">
             Please reply by {{ rsvp.deadlineLabel }}
         </p>
@@ -142,7 +142,7 @@ const fieldClass =
                     class="flex-1 cursor-pointer rounded-sheet border px-[20px] py-[16px] text-[13px] font-medium uppercase tracking-[.2em]"
                     :class="
                         form.attending === option.value
-                            ? 'border-paper bg-paper text-terracotta'
+                            ? 'border-paper bg-paper text-olive'
                             : 'border-paper/40 bg-transparent text-paper'
                     "
                     @click="choose(option.value)"
@@ -239,7 +239,7 @@ const fieldClass =
             <button
                 type="submit"
                 :disabled="form.processing || form.attending === null"
-                class="mt-[28px] w-full cursor-pointer rounded-sheet bg-paper px-[34px] py-[16px] text-[13px] font-medium uppercase tracking-[.26em] text-terracotta disabled:opacity-50"
+                class="mt-[28px] w-full cursor-pointer rounded-sheet bg-paper px-[34px] py-[16px] text-[13px] font-medium uppercase tracking-[.26em] text-olive disabled:opacity-50"
             >
                 {{ form.processing ? 'Sending…' : replied ? 'Update our reply' : 'Send our reply' }}
             </button>

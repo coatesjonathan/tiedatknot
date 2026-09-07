@@ -18,7 +18,7 @@ defineProps({
                 class="grid grid-cols-[96px_1fr] gap-[22px] border-t border-rule py-[20px]"
                 :class="index === schedule.length - 1 && 'border-b'"
             >
-                <p class="m-0 font-serif text-[22px] text-terracotta">{{ item.time }}</p>
+                <p class="m-0 font-serif text-[22px] text-olive">{{ item.time }}</p>
                 <div>
                     <p class="m-0 text-[19px] font-normal">{{ item.title }}</p>
                     <p v-if="item.detail" class="mt-[4px] text-[16px] font-light text-ink-muted">{{ item.detail }}</p>
