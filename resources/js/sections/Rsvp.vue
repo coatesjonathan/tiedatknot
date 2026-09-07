@@ -86,7 +86,7 @@ const fieldClass =
 </script>
 
 <template>
-    <RevealSection id="rsvp" class="mt-[90px] bg-olive px-[24px] pb-[96px] pt-[88px] text-center">
+    <RevealSection class="mt-[90px] bg-olive px-[24px] pb-[96px] pt-[88px] text-center">
         <p v-if="rsvp.deadlineLabel" class="m-0 text-[12px] font-medium uppercase tracking-[.3em] text-paper/70">
             {{ t('rsvp.deadline_prefix', { date: rsvp.deadlineLabel }) }}
         </p>

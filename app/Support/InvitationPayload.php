@@ -10,6 +10,7 @@ use App\Models\Hotel;
 use App\Models\Note;
 use App\Models\ScheduleItem;
 use App\Models\Setting;
+use App\Models\SiteSection;
 use App\Models\TravelOption;
 use Illuminate\Support\Facades\Storage;
 
@@ -45,6 +46,8 @@ class InvitationPayload
     {
         return [
             'copy' => SiteCopy::forInvitation(),
+            'sections' => SiteSection::visibility(),
+            'nav' => SiteSection::published()->where('in_menu', true)->get(['label', 'anchor']),
 
             'guest' => $guest ? [
                 'name' => $guest->name,

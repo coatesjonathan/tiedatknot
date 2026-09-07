@@ -14,6 +14,7 @@ import Questions from '@/sections/Questions.vue'
 import Rsvp from '@/sections/Rsvp.vue'
 import SiteFooter from '@/sections/SiteFooter.vue'
 import SiteHeader from '@/sections/SiteHeader.vue'
+import SiteNav from '@/sections/SiteNav.vue'
 import TheDay from '@/sections/TheDay.vue'
 import ThePlace from '@/sections/ThePlace.vue'
 import WhereToStay from '@/sections/WhereToStay.vue'
@@ -31,6 +32,10 @@ provide(
     COPY_KEY,
     computed(() => ({ ...(props.site.copy ?? {}), ...(props.invitation?.copy ?? {}) })),
 )
+
+// Sections the couple has switched off never render, so nothing half-written
+// reaches a guest.
+const shown = (anchor) => props.invitation?.sections?.[anchor] !== false
 
 // A returning guest lands straight on the invitation; everyone else starts sealed.
 const { stage, vals, run, reset } = useEnvelopeSequence(props.site.animationSpeed, props.unlocked)
@@ -89,22 +94,41 @@ watch(email, (value) => {
         :style="{ opacity: vals.contentOpacity }"
         :inert="! vals.contentOn"
     >
-        <SiteHeader :site="site" :guest="invitation.guest" />
+        <SiteNav :items="invitation.nav" />
+        <SiteHeader
+            :site="site"
+            :guest="invitation.guest"
+            :rsvp="invitation.rsvp"
+            :show-rsvp-link="shown('rsvp')"
+        />
         <HeroImage :src="invitation.heroImage" :alt="invitation.venue.name" />
         <PullQuote :quote="invitation.pullQuote" />
-        <TheDay :schedule="invitation.schedule" :footnote="invitation.scheduleFootnote" />
-        <ThePlace :venue="invitation.venue" />
+        <TheDay
+            v-if="shown('the-day')"
+            id="the-day"
+            :schedule="invitation.schedule"
+            :footnote="invitation.scheduleFootnote"
+        />
+        <ThePlace v-if="shown('the-place')" id="the-place" :venue="invitation.venue" />
         <GettingThere
+            v-if="shown('getting-there')"
+            id="getting-there"
             :intro="invitation.travelIntro"
             :options="invitation.travelOptions"
             :footnote="invitation.travelFootnote"
         />
-        <WhereToStay :intro="invitation.hotelsIntro" :block-code="invitation.blockCode" :hotels="invitation.hotels" />
-        <WhileYoureHere :highlights="invitation.highlights" />
-        <Gallery :images="invitation.gallery" />
-        <GoodToKnow :notes="invitation.notes" />
-        <Questions :faqs="invitation.faqs" />
-        <Rsvp :rsvp="invitation.rsvp" />
+        <WhereToStay
+            v-if="shown('where-to-stay')"
+            id="where-to-stay"
+            :intro="invitation.hotelsIntro"
+            :block-code="invitation.blockCode"
+            :hotels="invitation.hotels"
+        />
+        <WhileYoureHere v-if="shown('while-youre-here')" id="while-youre-here" :highlights="invitation.highlights" />
+        <Gallery v-if="shown('gallery')" id="gallery" :images="invitation.gallery" />
+        <GoodToKnow v-if="shown('good-to-know')" id="good-to-know" :notes="invitation.notes" />
+        <Questions v-if="shown('questions')" id="questions" :faqs="invitation.faqs" />
+        <Rsvp v-if="shown('rsvp')" id="rsvp" :rsvp="invitation.rsvp" />
         <SiteFooter :site="site" @replay="replay" />
     </div>
 

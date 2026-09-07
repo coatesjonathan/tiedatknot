@@ -71,6 +71,11 @@
     summary::-webkit-details-marker {
         display: none;
     }
+
+    /* Keep an anchored section clear of the sticky menu bar. */
+    section[id] {
+        scroll-margin-top: 64px;
+    }
 }
 
 /* Paper grain: two tiling feTurbulence textures, multiplied over the surface. */

@@ -50,6 +50,8 @@ class SiteCopy
             'header.greeting_fallback' => ['header', 'Greeting when we have no name', 'You are invited', 1],
             'header.seats_one' => ['header', 'Seats saved (one)', "We've saved a seat for you", 1],
             'header.seats_many' => ['header', 'Seats saved (several)', "We've saved :count seats for you", 1],
+            'header.rsvp_cta' => ['header', 'Reply button', 'RSVP now', 1],
+            'header.rsvp_cta_replied' => ['header', 'Reply button once they have replied', 'Change your reply', 1],
             'header.countdown_days' => ['header', 'Countdown', ':count days to go', 1],
             'header.countdown_tomorrow' => ['header', 'Countdown — the day before', 'tomorrow', 1],
             'header.countdown_today' => ['header', 'Countdown — the day itself', 'today', 1],
