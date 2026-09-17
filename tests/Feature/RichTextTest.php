@@ -17,6 +17,48 @@ it('keeps the formatting the editor produces', function () {
         ->toBe('<ul><li>One</li><li>Two</li></ul>');
 });
 
+it('keeps the headings the editor can now write', function () {
+    expect(RichText::html('<h1>Welcome</h1><p>Come to Granada.</p>'))
+        ->toBe('<h1>Welcome</h1><p>Come to Granada.</p>');
+
+    expect(RichText::html('<h2>The day</h2><h3>The night</h3>'))
+        ->toBe('<h2>The day</h2><h3>The night</h3>');
+});
+
+it('keeps the rest of the toolbar', function () {
+    expect(RichText::html('<blockquote>A quote</blockquote>'))->toContain('<blockquote>');
+    expect(RichText::html('<p>A <mark>highlight</mark> and <small>small print</small>.</p>'))
+        ->toContain('<mark>')
+        ->toContain('<small>');
+    expect(RichText::html('<p>Before</p><hr><p>After</p>'))->toContain('<hr');
+    expect(RichText::html('<table><tr><th>A</th><td>B</td></tr></table>'))
+        ->toContain('<table>')
+        ->toContain('<th>');
+});
+
+it('keeps alignment and the lead class, and drops everything else', function () {
+    expect(RichText::html('<p style="text-align: center">Centred</p>'))
+        ->toContain('text-align: center');
+
+    expect(RichText::html('<p class="lead">Opening line</p>'))
+        ->toBe('<p class="lead">Opening line</p>');
+
+    expect(RichText::html('<p class="absolute inset-0">Hijack</p>'))
+        ->toBe('<p>Hijack</p>');
+});
+
+it('throws out styles that are not typography', function () {
+    $dirty = '<p style="background: url(https://evil.test/x); position: fixed; text-align: center">Hi</p>';
+
+    expect(RichText::html($dirty))
+        ->toContain('text-align: center')
+        ->not->toContain('url(')
+        ->not->toContain('position');
+
+    expect(RichText::html('<p style="color: expression(alert(1))">Hi</p>'))
+        ->not->toContain('expression');
+});
+
 it('strips anything that could run', function () {
     $dirty = '<p>Hello</p><script>alert(1)</script><img src=x onerror="alert(1)">';
 
@@ -72,4 +114,15 @@ it('sends sanitised HTML to an unlocked guest', function () {
     expect($response->getContent())
         ->toContain('Ask <strong>us<\/strong>.')
         ->not->toContain('alert(1)');
+});
+
+it('sends the pull quote heading through to the page', function () {
+    $guest = Guest::create(['name' => 'Ada', 'email' => 'ada@example.test', 'seats' => 2]);
+    Setting::current()->update([
+        'pull_quote' => '<h1>Welcome</h1><p>Come to Granada.</p>',
+    ]);
+
+    $response = $this->withSession(['guest_id' => $guest->id])->get('/')->assertOk();
+
+    expect($response->getContent())->toContain('<h1>Welcome<\/h1>');
 });

@@ -42,7 +42,7 @@ class DatabaseSeeder extends Seeder
             'honeymoon_url' => null,
             'hero_image_path' => 'wedding/venue.png',
             'venue_image_path' => null,
-            'pull_quote' => "We're getting married in a walled garden below the Alhambra — and it's a long way to ask you to come, which is exactly why we want you there.",
+            'pull_quote' => "<h1>Welcome</h1><p>We're getting married in a walled garden below the Alhambra — and it's a long way to ask you to come, which is exactly why we want you there.</p>",
             'travel_intro' => "Most of you are coming from the UK or the US. There's no need to fly into Granada itself — the trains are excellent, and the ride down through the mountains is part of the trip.",
             'travel_footnote' => "Coming a few days early? Say so when you reply and we'll point you at the good bits.",
             'hotels_intro' => "We've held rooms at our favourite places at an agreed rate. Quote :code when you book, before the release date below.",

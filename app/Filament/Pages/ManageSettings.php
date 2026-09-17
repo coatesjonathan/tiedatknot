@@ -8,6 +8,7 @@ use Filament\Actions\Action;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\RichEditor;
+use Filament\Forms\Components\RichEditor\ToolbarButtonGroup;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
@@ -66,9 +67,9 @@ class ManageSettings extends Page
                     ->schema([
                         TextInput::make('venue_name')->required(),
                         TextInput::make('maps_url')->label('Maps link')->url(),
-                        RichEditor::make('venue_description')->columnSpanFull(),
+                        static::copy('venue_description')->columnSpanFull(),
                         Textarea::make('venue_address')->rows(2),
-                        RichEditor::make('venue_travel_note')->label('Getting there note')->columnSpanFull(),
+                        static::copy('venue_travel_note')->label('Getting there note')->columnSpanFull(),
                         FileUpload::make('venue_image_path')
                             ->label('Venue photo')
                             ->image()
@@ -83,13 +84,15 @@ class ManageSettings extends Page
 
                 Section::make('Copy')
                     ->schema([
-                        RichEditor::make('pull_quote'),
-                        RichEditor::make('schedule_footnote'),
-                        RichEditor::make('travel_intro'),
-                        RichEditor::make('travel_footnote'),
-                        RichEditor::make('hotels_intro')
+                        static::copy('pull_quote')
+                            ->label('Welcome / pull quote')
+                            ->helperText('Set a line to Heading 1 to render it as the big cursive title.'),
+                        static::copy('schedule_footnote'),
+                        static::copy('travel_intro'),
+                        static::copy('travel_footnote'),
+                        static::copy('hotels_intro')
                             ->helperText('Write :code where the hotel block code should appear.'),
-                        RichEditor::make('rsvp_body')->label('RSVP explainer'),
+                        static::copy('rsvp_body')->label('RSVP explainer'),
                     ]),
 
                 Section::make('Replies and extras')
@@ -113,6 +116,39 @@ class ManageSettings extends Page
                             ->required(),
                         Toggle::make('countdown_enabled')->label('Show the countdown'),
                     ]),
+            ]);
+    }
+
+    /**
+     * A rich editor with the full toolbar behind it.
+     *
+     * Headings map onto the invitation's type scale when rendered: `h1` is the
+     * big script flourish, `h2`–`h6` step down through the serif. Whatever the
+     * toolbar can write, `App\\Support\\RichText` lets through and the `rich`
+     * stylesheet styles.
+     */
+    protected static function copy(string $name): RichEditor
+    {
+        return RichEditor::make($name)
+            ->toolbarButtons([
+                [ToolbarButtonGroup::make('Style', ['paragraph', 'lead', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6'])->textualButtons()],
+                ['bold', 'italic', 'underline', 'strike', 'subscript', 'superscript', 'link'],
+                ['textColor', 'highlight', 'small', 'code', 'clearFormatting'],
+                [ToolbarButtonGroup::make('Alignment', ['alignStart', 'alignCenter', 'alignEnd', 'alignJustify'])],
+                ['bulletList', 'orderedList', 'blockquote', 'horizontalRule', 'details'],
+                ['table'],
+                ['undo', 'redo'],
+            ])
+            ->floatingToolbars([
+                'paragraph' => ['bold', 'italic', 'underline', 'strike', 'link', 'highlight'],
+                'heading' => ['h1', 'h2', 'h3', 'alignStart', 'alignCenter', 'alignEnd'],
+                'table' => [
+                    'tableAddColumnBefore', 'tableAddColumnAfter', 'tableDeleteColumn',
+                    'tableAddRowBefore', 'tableAddRowAfter', 'tableDeleteRow',
+                    'tableMergeCells', 'tableSplitCell',
+                    'tableToggleHeaderRow', 'tableToggleHeaderCell',
+                    'tableDelete',
+                ],
             ]);
     }
 
