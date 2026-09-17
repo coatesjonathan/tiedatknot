@@ -7,7 +7,7 @@ defineProps({ quote: { type: String, default: '' } })
 <template>
     <RevealSection class="mx-auto max-w-180 px-6 pt-20 text-center">
         <div
-            class="rich m-0 [&>p>strong]:font-serif [&>p>strong]:text-[clamp(24px,3vw,34px)] leading-[1.4] text-ink text-pretty"
+            class="rich m-0 [&>p>strong]:font-serif [&>p>strong]:text-[clamp(24px,3vw,34px)] leading-[1.4] text-ink font-light text-pretty"
             v-html="quote"
         ></div>
     </RevealSection>
