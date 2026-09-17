@@ -88,32 +88,12 @@ defineProps({
                 </div>
             </div>
 
-            <!-- 7. Wax seal, pressed on the flap tip -->
+            <!-- 7. Wax seal, pressed on the flap tip. It gives, then fades. -->
             <div
-                class="absolute left-1/2 top-[62%] z-7 -ml-[53px] -mt-[53px] size-[106px] drop-shadow-[0_4px_5px_rgba(27,39,25,.42)] [transition:transform_340ms_cubic-bezier(.34,1.32,.5,1),opacity_700ms_ease]"
-                :style="{ transform: vals.sealBot, opacity: vals.sealBotOpacity }"
+                class="absolute left-1/2 top-[62%] z-7 -ml-[53px] -mt-[53px] size-[106px] drop-shadow-[0_4px_5px_rgba(27,39,25,.42)] [transition:transform_420ms_cubic-bezier(.3,.8,.35,1),opacity_520ms_ease]"
+                :style="{ transform: vals.sealPress, opacity: vals.sealOpacity }"
             >
-                <WaxSeal :vals="vals" :monogram="site.monogram" />
-            </div>
-
-            <!-- Wax chips that scatter as the seal gives -->
-            <div class="pointer-events-none absolute left-1/2 top-[62%] z-8 size-0">
-                <div
-                    class="absolute -ml-[22px] -mt-[4px] h-[7px] w-[9px] rounded-[44%_56%_48%_52%] bg-[#6d8a67] [transition:transform_1100ms_cubic-bezier(.3,.1,.85,.55),opacity_1100ms_ease]"
-                    :style="{ transform: vals.chipA, opacity: vals.chipsOpacity }"
-                ></div>
-                <div
-                    class="absolute ml-[14px] -mt-[2px] h-[6px] w-[7px] rounded-[52%_48%_44%_56%] bg-olive-dark [transition:transform_1100ms_cubic-bezier(.3,.1,.85,.55),opacity_1100ms_ease]"
-                    :style="{ transform: vals.chipB, opacity: vals.chipsOpacity }"
-                ></div>
-                <div
-                    class="absolute -ml-[8px] mt-[2px] size-[5px] rounded-full bg-olive [transition:transform_1100ms_cubic-bezier(.3,.1,.85,.55),opacity_1100ms_ease]"
-                    :style="{ transform: vals.chipC, opacity: vals.chipsOpacity }"
-                ></div>
-                <div
-                    class="absolute ml-[4px] h-[4px] w-[6px] rounded-[48%_52%_52%_48%] bg-[#7f9c78] [transition:transform_1100ms_cubic-bezier(.3,.1,.85,.55),opacity_1100ms_ease]"
-                    :style="{ transform: vals.chipD, opacity: vals.chipsOpacity }"
-                ></div>
+                <WaxSeal :monogram="site.monogram" />
             </div>
         </div>
     </div>
