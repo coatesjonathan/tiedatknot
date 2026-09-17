@@ -26,7 +26,6 @@ class TravelOptionForm
                     ->columnSpanFull(),
                 RichEditor::make('footnote')
                     ->helperText('Use the link button to point at a booking site.')
-                    ->rows(2)
                     ->columnSpanFull(),
                 Toggle::make('is_published')
                     ->label('Show on the invitation')
