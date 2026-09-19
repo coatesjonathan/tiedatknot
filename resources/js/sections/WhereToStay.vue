@@ -26,7 +26,7 @@ const t = useCopy()
         <p class="mb-[8px] text-[12px] font-medium uppercase tracking-[.3em] text-clay">{{ t('section.hotels') }}</p>
 
         <div
-            class="rich mb-[30px] max-w-[640px] text-[17px] font-light leading-[1.7] text-ink-soft"
+            class="rich mb-7.5 text-[17px] font-light leading-[1.7] text-ink-soft"
             v-html="introHtml"
         ></div>
 
