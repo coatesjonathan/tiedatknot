@@ -8,8 +8,8 @@ const t = useCopy()
 </script>
 
 <template>
-    <RevealSection class="mx-auto max-w-[820px] px-[24px] pt-[88px]">
-        <p class="mb-[22px] text-[12px] font-medium uppercase tracking-[.3em] text-clay">{{ t('section.questions') }}</p>
+    <RevealSection class="mx-auto max-w-[51.25rem] px-6 pt-22">
+        <p class="mb-5.5 text-xs font-medium uppercase tracking-[.3em] text-clay">{{ t('section.questions') }}</p>
 
         <details
             v-for="(faq, index) in faqs"
@@ -17,14 +17,14 @@ const t = useCopy()
             class="group border-t border-rule"
             :class="index === faqs.length - 1 && 'border-b'"
         >
-            <summary class="flex items-center justify-between gap-[16px] py-[20px] text-[19px] text-ink">
+            <summary class="flex items-center justify-between gap-4 py-5 text-[1.1875rem] text-ink">
                 {{ faq.question }}
                 <span
-                    class="font-serif text-[22px] text-olive transition-transform duration-[250ms] ease-[ease] group-open:rotate-45"
+                    class="font-serif text-[1.375rem] text-olive transition-transform duration-[250ms] ease-linear group-open:rotate-45"
                     >+</span
                 >
             </summary>
-            <div class="rich mb-[22px] text-[16px] font-light leading-[1.7] text-ink-soft" v-html="faq.answer"></div>
+            <div class="rich mb-5.5 text-base font-light leading-relaxed text-ink-soft" v-html="faq.answer"></div>
         </details>
     </RevealSection>
 </template>

@@ -22,6 +22,7 @@ class PageSections
         'where-to-stay' => 'Where to stay',
         'while-youre-here' => "While you're here",
         'gallery' => 'Photos',
+        'gifts' => 'Gifts',
         'good-to-know' => 'Good to know',
         'questions' => 'Questions',
         'rsvp' => 'RSVP',

@@ -5,7 +5,7 @@ defineProps({ quote: { type: String, default: '' } })
 </script>
 
 <template>
-    <RevealSection class="mx-auto max-w-180 px-6 pt-20 text-center">
+    <RevealSection class="mx-auto max-w-[45rem] px-6 pt-20 text-center">
         <!--
             Everything here is the couple's own formatting. `rich` carries the
             type scale — a Heading 1 becomes the big cursive line, the rest is
@@ -13,7 +13,7 @@ defineProps({ quote: { type: String, default: '' } })
             a size up from the page default, and quotes without their side rule.
         -->
         <div
-            class="rich text-[clamp(17px,1.6vw,21px)] leading-[1.6] font-light text-ink [&_blockquote]:border-l-0 [&_blockquote]:pl-0 [&_ol]:list-inside [&_ol]:pl-0 [&_ul]:list-inside [&_ul]:pl-0"
+            class="rich text-[clamp(1.0625rem,1.6vw,1.3125rem)] leading-relaxed font-light text-ink [&_blockquote]:border-l-0 [&_blockquote]:pl-0 [&_ol]:list-inside [&_ol]:pl-0 [&_ul]:list-inside [&_ul]:pl-0"
             v-html="quote"
         ></div>
     </RevealSection>

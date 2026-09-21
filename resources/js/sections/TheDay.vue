@@ -11,24 +11,24 @@ const t = useCopy()
 </script>
 
 <template>
-    <RevealSection class="mx-auto max-w-[820px] px-[24px] pt-[88px]">
-        <p class="mb-[26px] text-[12px] font-medium uppercase tracking-[.3em] text-clay">{{ t('section.day') }}</p>
+    <RevealSection class="mx-auto max-w-[51.25rem] px-6 pt-22">
+        <p class="mb-[1.625rem] text-xs font-medium uppercase tracking-[.3em] text-clay">{{ t('section.day') }}</p>
 
         <div class="grid">
             <div
                 v-for="(item, index) in schedule"
                 :key="item.time + item.title"
-                class="grid grid-cols-[96px_1fr] gap-[22px] border-t border-rule py-[20px]"
+                class="grid grid-cols-[6rem_1fr] gap-5.5 border-t border-rule py-5"
                 :class="index === schedule.length - 1 && 'border-b'"
             >
-                <p class="m-0 font-serif text-[22px] text-olive">{{ item.time }}</p>
+                <p class="m-0 font-serif text-[1.375rem] text-olive">{{ item.time }}</p>
                 <div>
-                    <p class="m-0 text-[19px] font-normal">{{ item.title }}</p>
-                    <p v-if="item.detail" class="mt-[4px] text-[16px] font-light text-ink-muted">{{ item.detail }}</p>
+                    <p class="m-0 text-[1.1875rem] font-normal">{{ item.title }}</p>
+                    <p v-if="item.detail" class="mt-1 text-base font-light text-ink-muted">{{ item.detail }}</p>
                 </div>
             </div>
         </div>
 
-        <div v-if="footnote" class="rich mt-[14px] text-[14px] font-light italic text-ink-ghost" v-html="footnote"></div>
+        <div v-if="footnote" class="rich mt-3.5 text-sm font-light italic text-ink-ghost" v-html="footnote"></div>
     </RevealSection>
 </template>

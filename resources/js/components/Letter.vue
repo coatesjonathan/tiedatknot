@@ -19,7 +19,7 @@ defineProps({
         }"
     >
         <div
-            class="relative flex h-[84px] flex-col items-center justify-center gap-[9px] overflow-hidden transform-3d bg-[linear-gradient(180deg,#fdfcfb_0%,#faf9f7_88%,#eeebe7_100%)] [transform-origin:bottom_center] transition-transform duration-[900ms] ease-[cubic-bezier(.3,.8,.25,1)]"
+            class="relative flex h-[5.25rem] flex-col items-center justify-center gap-2 overflow-hidden transform-3d bg-[linear-gradient(180deg,#fdfcfb_0%,#faf9f7_88%,#eeebe7_100%)] [transform-origin:bottom_center] transition-transform duration-[900ms] ease-[cubic-bezier(.3,.8,.25,1)]"
             :style="{
                 transform: `rotateX(${vals.foldTop}deg)`,
                 opacity: vals.panelOpacity,
@@ -27,27 +27,27 @@ defineProps({
             }"
         >
             <div class="grain-soft"></div>
-            <p class="m-0 font-serif text-[26px] text-olive">
+            <p class="m-0 font-serif text-[1.625rem] text-olive">
                 {{ site.firstName.charAt(0) }} &amp; {{ site.secondName.charAt(0) }}
             </p>
-            <p class="m-0 text-[10px] uppercase tracking-[.34em] text-clay">
+            <p class="m-0 text-[0.625rem] uppercase tracking-[.34em] text-clay">
                 {{ site.locationLabel?.split(',')[0] }}
             </p>
         </div>
 
         <div
-            class="relative flex h-[92px] flex-col items-center justify-center gap-[7px] overflow-hidden bg-[linear-gradient(180deg,#f6f3f0_0%,#fdfcfb_12%,#fdfcfb_88%,#f3f0ec_100%)]"
+            class="relative flex h-[5.75rem] flex-col items-center justify-center gap-1.5 overflow-hidden bg-[linear-gradient(180deg,#f6f3f0_0%,#fdfcfb_12%,#fdfcfb_88%,#f3f0ec_100%)]"
             :style="{ boxShadow: vals.letterShadow }"
         >
             <div class="grain-soft"></div>
-            <p class="m-0 font-serif text-[30px] leading-[1.1] text-ink">
+            <p class="m-0 font-serif text-[1.875rem] leading-tight text-ink">
                 {{ site.firstName }} <span class="italic text-olive">&amp; {{ site.secondName }}</span>
             </p>
-            <p class="m-0 text-[10px] uppercase tracking-[.32em] text-ink-faint">{{ site.weddingDateLabel }}</p>
+            <p class="m-0 text-[0.625rem] uppercase tracking-[.32em] text-ink-faint">{{ site.weddingDateLabel }}</p>
         </div>
 
         <div
-            class="relative flex h-[84px] items-center justify-center overflow-hidden transform-3d bg-[linear-gradient(180deg,#eeebe7_0%,#faf9f7_14%,#fdfcfb_100%)] [transform-origin:top_center] transition-transform duration-[900ms] ease-[cubic-bezier(.3,.8,.25,1)]"
+            class="relative flex h-[5.25rem] items-center justify-center overflow-hidden transform-3d bg-[linear-gradient(180deg,#eeebe7_0%,#faf9f7_14%,#fdfcfb_100%)] [transform-origin:top_center] transition-transform duration-[900ms] ease-[cubic-bezier(.3,.8,.25,1)]"
             :style="{
                 transform: `rotateX(${vals.foldBot}deg)`,
                 opacity: vals.panelOpacity,
@@ -55,7 +55,7 @@ defineProps({
             }"
         >
             <div class="grain-soft"></div>
-            <p class="m-0 text-[11px] uppercase tracking-[.3em] text-clay">{{ site.venueName }}</p>
+            <p class="m-0 text-[0.6875rem] uppercase tracking-[.3em] text-clay">{{ site.venueName }}</p>
         </div>
     </div>
 </template>

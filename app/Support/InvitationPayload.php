@@ -106,6 +106,8 @@ class InvitationPayload
                 'question' => $faq->question,
                 'answer' => RichText::html($faq->answer),
             ])->values(),
+            'giftsBody' => RichText::html($settings->gifts_body),
+            'giftPaymentMethods' => $settings->gift_payment_methods ?? [],
 
             'gallery' => GalleryImage::published()->get()->map(fn (GalleryImage $image) => [
                 'image' => $this->url($image->image_path),

@@ -12,24 +12,24 @@ const t = useCopy()
 </script>
 
 <template>
-    <RevealSection class="mx-auto max-w-[1120px] px-[24px] pt-[88px]">
-        <p class="mb-[8px] text-[12px] font-medium uppercase tracking-[.3em] text-clay">{{ t('section.travel') }}</p>
-        <div class="rich mb-[30px] max-w-[640px] text-[17px] font-light leading-[1.7] text-ink-soft" v-html="intro"></div>
+    <RevealSection class="mx-auto max-w-[70rem] px-6 pt-22">
+        <p class="mb-2 text-xs font-medium uppercase tracking-[.3em] text-clay">{{ t('section.travel') }}</p>
+        <div class="rich mb-7.5 max-w-[40rem] text-[1.0625rem] font-light leading-relaxed text-ink-soft" v-html="intro"></div>
 
         <!-- 2px gaps over the rule colour give hairline dividers between cards -->
-        <div class="grid gap-[2px] bg-rule [grid-template-columns:repeat(auto-fit,minmax(280px,1fr))]">
-            <div v-for="option in options" :key="option.title" class="bg-card px-[28px] py-[32px]">
-                <p class="m-0 text-[11px] font-medium uppercase tracking-[.26em] text-olive">{{ option.label }}</p>
-                <h3 class="mt-[12px] font-serif text-[30px] font-normal text-ink">{{ option.title }}</h3>
-                <div class="rich mt-[14px] text-[16px] font-light leading-[1.7] text-ink-soft" v-html="option.body"></div>
+        <div class="grid gap-[2px] bg-rule [grid-template-columns:repeat(auto-fit,minmax(17.5rem,1fr))]">
+            <div v-for="option in options" :key="option.title" class="bg-card px-7 py-8">
+                <p class="m-0 text-[0.6875rem] font-medium uppercase tracking-[.26em] text-olive">{{ option.label }}</p>
+                <h3 class="mt-3 font-serif text-[1.875rem] font-normal text-ink">{{ option.title }}</h3>
+                <div class="rich mt-3.5 text-base font-light leading-relaxed text-ink-soft" v-html="option.body"></div>
                 <div
                     v-if="option.footnote"
-                    class="rich mt-[14px] text-[15px] font-light text-ink-muted"
+                    class="rich mt-3.5 text-[0.9375rem] font-light text-ink-muted"
                     v-html="option.footnote"
                 ></div>
             </div>
         </div>
 
-        <div v-if="footnote" class="rich mt-[18px] text-[15px] font-light italic text-ink-ghost" v-html="footnote"></div>
+        <div v-if="footnote" class="rich mt-4.5 text-[0.9375rem] font-light italic text-ink-ghost" v-html="footnote"></div>
     </RevealSection>
 </template>

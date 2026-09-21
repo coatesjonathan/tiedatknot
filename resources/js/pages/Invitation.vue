@@ -7,6 +7,7 @@ import { COPY_KEY } from '@/composables/useCopy'
 import { useEnvelopeSequence } from '@/composables/useEnvelopeSequence'
 import Gallery from '@/sections/Gallery.vue'
 import GettingThere from '@/sections/GettingThere.vue'
+import Gifts from '@/sections/Gifts.vue'
 import GoodToKnow from '@/sections/GoodToKnow.vue'
 import HeroImage from '@/sections/HeroImage.vue'
 import PullQuote from '@/sections/PullQuote.vue'
@@ -90,7 +91,7 @@ watch(email, (value) => {
     <!-- The invitation is only in the DOM once the server has unlocked it. -->
     <div
         v-if="invitation"
-        class="relative min-h-screen bg-cream transition-opacity duration-[800ms] ease-[ease]"
+        class="relative min-h-screen bg-cream transition-opacity duration-[800ms] ease-linear"
         :style="{ opacity: vals.contentOpacity }"
         :inert="! vals.contentOn"
     >
@@ -126,6 +127,12 @@ watch(email, (value) => {
         />
         <WhileYoureHere v-if="shown('while-youre-here')" id="while-youre-here" :highlights="invitation.highlights" />
         <Gallery v-if="shown('gallery')" id="gallery" :images="invitation.gallery" />
+        <Gifts
+            v-if="shown('gifts')"
+            id="gifts"
+            :body="invitation.giftsBody"
+            :payment-methods="invitation.giftPaymentMethods"
+        />
         <GoodToKnow v-if="shown('good-to-know')" id="good-to-know" :notes="invitation.notes" />
         <Questions v-if="shown('questions')" id="questions" :faqs="invitation.faqs" />
         <Rsvp v-if="shown('rsvp')" id="rsvp" :rsvp="invitation.rsvp" />

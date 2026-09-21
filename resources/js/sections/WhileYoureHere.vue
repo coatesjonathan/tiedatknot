@@ -8,13 +8,13 @@ const t = useCopy()
 </script>
 
 <template>
-    <RevealSection class="mx-auto max-w-[1120px] px-[24px] pt-[88px]">
-        <p class="mb-[26px] text-[12px] font-medium uppercase tracking-[.3em] text-clay">{{ t('section.highlights') }}</p>
+    <RevealSection class="mx-auto max-w-[70rem] px-6 pt-22">
+        <p class="mb-[1.625rem] text-xs font-medium uppercase tracking-[.3em] text-clay">{{ t('section.highlights') }}</p>
 
-        <div class="grid gap-[34px] [grid-template-columns:repeat(auto-fit,minmax(230px,1fr))]">
+        <div class="grid gap-[2.125rem] [grid-template-columns:repeat(auto-fit,minmax(14.375rem,1fr))]">
             <div v-for="item in highlights" :key="item.title">
-                <h3 class="m-0 font-serif text-[26px] font-normal text-ink">{{ item.title }}</h3>
-                <div class="rich mt-[8px] text-[16px] font-light leading-[1.7] text-ink-soft" v-html="item.body"></div>
+                <h3 class="m-0 font-serif text-[1.625rem] font-normal text-ink">{{ item.title }}</h3>
+                <div class="rich mt-2 text-base font-light leading-relaxed text-ink-soft" v-html="item.body"></div>
             </div>
         </div>
     </RevealSection>

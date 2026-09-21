@@ -14,6 +14,7 @@ class Setting extends Model
             'wedding_date' => 'date',
             'rsvp_deadline' => 'date',
             'countdown_enabled' => 'boolean',
+            'gift_payment_methods' => 'array',
         ];
     }
 

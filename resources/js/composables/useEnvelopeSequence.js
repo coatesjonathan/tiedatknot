@@ -84,7 +84,7 @@ export function useEnvelopeSequence(speed = 'quick', startOpen = false) {
         formOpacity: stage.value === 'gate' ? 1 : 0,
 
         envTilt: past('unfold') ? 0 : past('rise') ? 6 : 13,
-        envY: past('unfold') ? '110px' : past('rise') ? '26px' : '0px',
+        envY: past('unfold') ? '6.875rem' : past('rise') ? '1.625rem' : '0rem',
         envScale: past('unfold') ? 1.03 : 1,
         envOpacity: past('fade') ? 0 : past('unfold') ? 0.32 : 1,
         groundScale: past('unfold') ? 1.12 : 1,

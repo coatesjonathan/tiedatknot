@@ -8,14 +8,14 @@ const t = useCopy()
 </script>
 
 <template>
-    <RevealSection v-if="images.length" class="mx-auto max-w-[1120px] px-[24px] pt-[88px]">
-        <p class="mb-[26px] text-[12px] font-medium uppercase tracking-[.3em] text-clay">{{ t('section.gallery') }}</p>
+    <RevealSection v-if="images.length" class="mx-auto max-w-[70rem] px-6 pt-22">
+        <p class="mb-[1.625rem] text-xs font-medium uppercase tracking-[.3em] text-clay">{{ t('section.gallery') }}</p>
 
-        <div class="grid gap-[14px] [grid-template-columns:repeat(auto-fit,minmax(200px,1fr))]">
+        <div class="grid gap-3.5 [grid-template-columns:repeat(auto-fit,minmax(12.5rem,1fr))]">
             <div
                 v-for="(image, index) in images"
                 :key="index"
-                class="h-[300px] overflow-hidden bg-card"
+                class="h-[18.75rem] overflow-hidden bg-card"
                 :class="image.isWide && 'col-span-2'"
             >
                 <img :src="image.image" :alt="image.caption ?? ''" loading="lazy" class="size-full object-cover" />

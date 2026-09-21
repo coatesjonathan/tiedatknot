@@ -12,8 +12,8 @@ use BackedEnum;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
-use UnitEnum;
 use Filament\Tables\Table;
+use UnitEnum;
 
 class TravelOptionResource extends Resource
 {

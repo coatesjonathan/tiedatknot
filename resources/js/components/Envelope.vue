@@ -11,12 +11,12 @@ defineProps({
 
 <template>
     <div
-        class="relative aspect-[14/9] w-[min(470px,84vw,68vh)] animate-float perspective-[1500px] [perspective-origin:50%_34%]"
+        class="relative aspect-[14/9] w-[min(29.375rem,84vw,68vh)] animate-float perspective-[1500px] [perspective-origin:50%_34%]"
         :style="{ animationPlayState: floating ? 'running' : 'paused' }"
     >
         <!-- Ground shadow -->
         <div
-            class="absolute inset-x-[8%] -bottom-[26px] h-[30px] rounded-[50%] bg-[radial-gradient(ellipse_at_center,rgba(47,61,45,.34)_0%,rgba(47,61,45,0)_72%)] blur-[3px] [transition:transform_900ms_ease,opacity_900ms_ease]"
+            class="absolute inset-x-[8%] -bottom-[1.625rem] h-[1.875rem] rounded-[50%] bg-[radial-gradient(ellipse_at_center,rgba(47,61,45,.34)_0%,rgba(47,61,45,0)_72%)] blur-[3px] [transition:transform_900ms_ease,opacity_900ms_ease]"
             :style="{ transform: `scaleX(${vals.groundScale})`, opacity: vals.groundOpacity }"
         ></div>
 
@@ -37,13 +37,13 @@ defineProps({
 
             <!-- 11. Slot shadow at the mouth, over the emerging paper -->
             <div
-                class="pointer-events-none absolute inset-x-0 top-0 z-11 h-[34px] bg-[linear-gradient(180deg,rgba(43,55,41,.34)_0%,rgba(43,55,41,.12)_45%,rgba(43,55,41,0)_100%)] transition-opacity duration-[600ms] ease-[ease]"
+                class="pointer-events-none absolute inset-x-0 top-0 z-11 h-[2.125rem] bg-[linear-gradient(180deg,rgba(43,55,41,.34)_0%,rgba(43,55,41,.12)_45%,rgba(43,55,41,0)_100%)] transition-opacity duration-[600ms] ease-linear"
                 :style="{ opacity: vals.mouthShadow }"
             ></div>
 
             <!-- 12. Envelope lip, drawn over the letter so the paper slides out from behind it -->
             <div
-                class="pointer-events-none absolute inset-x-0 top-0 z-12 h-[7px] rounded-t-envelope bg-[linear-gradient(180deg,#f6f4f2_0%,#edeae5_62%,#dedad3_100%)] shadow-[0_2px_3px_-1px_rgba(45,57,43,.28)] transition-opacity duration-[500ms] ease-[ease]"
+                class="pointer-events-none absolute inset-x-0 top-0 z-12 h-[0.4375rem] rounded-t-envelope bg-[linear-gradient(180deg,#f6f4f2_0%,#edeae5_62%,#dedad3_100%)] shadow-[0_2px_3px_-1px_rgba(45,57,43,.28)] transition-opacity duration-500 ease-linear"
                 :style="{ opacity: vals.lipOpacity }"
             ></div>
 
@@ -67,7 +67,7 @@ defineProps({
 
             <!-- 5. The flap's cast shadow on the body -->
             <div
-                class="pointer-events-none absolute inset-0 z-5 bg-[linear-gradient(180deg,rgba(56,72,52,.30)_0%,rgba(56,72,52,.06)_62%,rgba(56,72,52,0)_100%)] transition-opacity duration-[700ms] ease-[ease] [clip-path:polygon(0_0,100%_0,50%_66%)]"
+                class="pointer-events-none absolute inset-0 z-5 bg-[linear-gradient(180deg,rgba(56,72,52,.30)_0%,rgba(56,72,52,.06)_62%,rgba(56,72,52,0)_100%)] transition-opacity duration-700 ease-linear [clip-path:polygon(0_0,100%_0,50%_66%)]"
                 :style="{ opacity: vals.flapShadow }"
             ></div>
 
@@ -90,7 +90,7 @@ defineProps({
 
             <!-- 7. Wax seal, pressed on the flap tip. It gives, then fades. -->
             <div
-                class="absolute left-1/2 top-[62%] z-7 -ml-[53px] -mt-[53px] size-[106px] drop-shadow-[0_4px_5px_rgba(27,39,25,.42)] [transition:transform_420ms_cubic-bezier(.3,.8,.35,1),opacity_520ms_ease]"
+                class="absolute left-1/2 top-[62%] z-7 -ml-[3.3125rem] -mt-[3.3125rem] size-[6.625rem] drop-shadow-[0_4px_5px_rgba(27,39,25,.42)] [transition:transform_420ms_cubic-bezier(.3,.8,.35,1),opacity_520ms_ease]"
                 :style="{ transform: vals.sealPress, opacity: vals.sealOpacity }"
             >
                 <WaxSeal :monogram="site.monogram" />

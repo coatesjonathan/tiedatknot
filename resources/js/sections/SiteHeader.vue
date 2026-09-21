@@ -23,32 +23,32 @@ const ctaLabel = computed(() => (replied.value ? t('header.rsvp_cta_replied') : 
 </script>
 
 <template>
-    <header class="flex flex-col items-center px-[24px] pt-[86px] text-center">
-        <p class="m-0 text-[12px] font-normal uppercase tracking-[.32em] text-clay">
+    <header class="flex flex-col items-center px-6 pt-[5.375rem] text-center">
+        <p class="m-0 text-xs font-normal uppercase tracking-[.32em] text-clay">
             {{ guest?.greeting ?? t('header.greeting_fallback') }}
         </p>
 
         <h1
-            class="mt-[22px] font-serif text-[clamp(56px,11vw,130px)] font-normal leading-[.95] tracking-[-.01em] text-ink"
+            class="mt-5.5 font-serif text-[clamp(3.5rem,11vw,8.125rem)] font-normal leading-none tracking-tight text-ink"
         >
             {{ site.firstName }}<span class="block italic text-olive">&amp; {{ site.secondName }}</span>
         </h1>
 
-        <p class="mt-[30px] text-[15px] uppercase tracking-[.28em] text-ink-soft">
+        <p class="mt-7.5 text-[0.9375rem] uppercase tracking-[.28em] text-ink-soft">
             {{ site.weddingDateLabel }} · {{ site.locationLabel }}
         </p>
 
-        <p class="mt-[12px] text-[16px] font-light text-ink-faint">
+        <p class="mt-3 text-base font-light text-ink-faint">
             {{ site.venueName }}<template v-if="countdown"> · {{ countdown }}</template>
         </p>
 
-        <p v-if="guest?.seatLine" class="mt-[6px] text-[16px] font-light text-olive">{{ guest.seatLine }}</p>
+        <p v-if="guest?.seatLine" class="mt-1.5 text-base font-light text-olive">{{ guest.seatLine }}</p>
 
         <!-- The main thing we want from a guest, put where they land. -->
         <a
             v-if="showRsvpLink"
             href="#rsvp"
-            class="mt-[30px] inline-flex items-center gap-[12px] rounded-sheet bg-olive px-[42px] py-[20px] text-[14px] font-medium uppercase tracking-[.24em] text-paper shadow-[0_10px_24px_-14px_rgba(58,70,54,.85)] transition-colors duration-[200ms] hover:bg-olive-dark"
+            class="mt-7.5 inline-flex items-center gap-3 rounded-sheet bg-olive px-[2.625rem] py-5 text-sm font-medium uppercase tracking-[.24em] text-paper shadow-[0_10px_24px_-14px_rgba(58,70,54,.85)] transition-colors duration-200 hover:bg-olive-dark"
             @click.prevent="scrollToSection('rsvp')"
         >
             {{ ctaLabel }}

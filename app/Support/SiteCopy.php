@@ -63,6 +63,7 @@ class SiteCopy
             'section.hotels' => ['sections', 'Hotels', 'Where to stay', 1],
             'section.highlights' => ['sections', 'Things to do', "While you're here", 1],
             'section.gallery' => ['sections', 'Photographs', 'Us, so far', 1],
+            'section.gifts' => ['sections', 'Gifts', 'Gifts', 1],
             'section.questions' => ['sections', 'FAQs', 'Questions', 1],
             'link.maps' => ['sections', 'Maps link', 'Open in maps', 1],
             'link.book' => ['sections', 'Hotel booking link', 'Book', 1],

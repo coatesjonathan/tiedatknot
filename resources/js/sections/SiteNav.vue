@@ -83,8 +83,8 @@ onBeforeUnmount(() => {
         aria-label="Sections"
     >
         <!-- Narrow screens: where you are, and a button for the rest. -->
-        <div class="flex items-center justify-between gap-[12px] px-[18px] py-[11px] sm:hidden">
-            <span class="truncate text-[11px] font-medium uppercase tracking-[.2em] text-ink-muted">
+        <div class="flex items-center justify-between gap-3 px-[1.125rem] py-[0.6875rem] sm:hidden">
+            <span class="truncate text-[0.6875rem] font-medium uppercase tracking-[.2em] text-ink-muted">
                 {{ activeLabel }}
             </span>
 
@@ -92,7 +92,7 @@ onBeforeUnmount(() => {
                 type="button"
                 :aria-expanded="open"
                 aria-controls="site-nav-links"
-                class="-mr-[6px] flex cursor-pointer items-center gap-[8px] rounded-sheet border-0 bg-transparent p-[6px] text-[11px] font-medium uppercase tracking-[.2em] text-ink"
+                class="-mr-1.5 flex cursor-pointer items-center gap-2 rounded-sheet border-0 bg-transparent p-1.5 text-[0.6875rem] font-medium uppercase tracking-[.2em] text-ink"
                 @click="open = ! open"
             >
                 {{ open ? 'Close' : 'Menu' }}
@@ -109,10 +109,10 @@ onBeforeUnmount(() => {
 
         <ul
             id="site-nav-links"
-            class="m-0 list-none border-rule/60 p-0 sm:flex sm:items-center sm:justify-center sm:gap-[6px] sm:border-t-0 sm:px-[16px] sm:py-[10px]"
+            class="m-0 list-none border-rule/60 p-0 sm:flex sm:items-center sm:justify-center sm:gap-1.5 sm:border-t-0 sm:px-4 sm:py-2.5"
             :class="
                 open
-                    ? 'block max-h-[70vh] overflow-y-auto border-t px-[10px] pb-[10px] pt-[6px] sm:max-h-none sm:overflow-visible'
+                    ? 'block max-h-[70vh] overflow-y-auto border-t px-2.5 pb-2.5 pt-1.5 sm:max-h-none sm:overflow-visible'
                     : 'hidden'
             "
         >
@@ -120,7 +120,7 @@ onBeforeUnmount(() => {
                 <a
                     :href="`#${item.anchor}`"
                     :aria-current="active === item.anchor ? 'true' : undefined"
-                    class="block rounded-sheet px-[12px] py-[11px] text-[12px] font-medium uppercase tracking-[.2em] transition-colors duration-[200ms] sm:whitespace-nowrap sm:py-[7px] sm:text-[11px]"
+                    class="block rounded-sheet px-3 py-[0.6875rem] text-xs font-medium uppercase tracking-[.2em] transition-colors duration-200 sm:whitespace-nowrap sm:py-[0.4375rem] sm:text-[0.6875rem]"
                     :class="
                         active === item.anchor
                             ? 'bg-olive text-paper'

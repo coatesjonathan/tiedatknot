@@ -48,8 +48,8 @@ const DISC = 'M50,4 C74,4 96,22 96,50 C96,76 75,96 50,96 C25,96 4,76 4,50 C4,22 
             <ellipse cx="62" cy="78" rx="34" ry="24" fill="rgba(19,27,17,.2)" />
             <circle cx="50" cy="50" r="39.5" fill="none" stroke="rgba(19,27,17,.26)" stroke-width="2.2" />
             <circle cx="50" cy="50" r="37" fill="none" stroke="rgba(233,240,231,.2)" stroke-width="1.4" />
-            <text x="50" y="67.4" text-anchor="middle" class="font-serif text-[42px] tracking-[1px] fill-[rgba(19,27,17,.6)]">{{ monogram }}</text>
-            <text x="50" y="65.6" text-anchor="middle" class="font-serif text-[42px] tracking-[1px] fill-[rgba(225,235,223,.34)]">{{ monogram }}</text>
+            <text x="50" y="67.4" text-anchor="middle" class="font-serif text-[2.625rem] tracking-[1px] fill-[rgba(19,27,17,.6)]">{{ monogram }}</text>
+            <text x="50" y="65.6" text-anchor="middle" class="font-serif text-[2.625rem] tracking-[1px] fill-[rgba(225,235,223,.34)]">{{ monogram }}</text>
             <circle cx="50" cy="50" r="50" fill="url(#waxRim)" />
         </g>
     </svg>

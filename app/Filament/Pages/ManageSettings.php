@@ -7,6 +7,7 @@ use BackedEnum;
 use Filament\Actions\Action;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\RichEditor\ToolbarButtonGroup;
 use Filament\Forms\Components\Select;
@@ -92,6 +93,15 @@ class ManageSettings extends Page
                         static::copy('travel_footnote'),
                         static::copy('hotels_intro')
                             ->helperText('Write :code where the hotel block code should appear.'),
+                        static::copy('gifts_body')->label('Gifts section'),
+                        Repeater::make('gift_payment_methods')
+                            ->label('Payment methods')
+                            ->schema([
+                                TextInput::make('label')->required(),
+                                TextInput::make('url')->url()->required(),
+                            ])
+                            ->columns(2)
+                            ->itemLabel(fn (array $state): ?string => $state['label'] ?? null),
                         static::copy('rsvp_body')->label('RSVP explainer'),
                     ]),
 
