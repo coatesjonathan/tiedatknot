@@ -22,7 +22,7 @@ const t = useCopy()
 </script>
 
 <template>
-    <RevealSection class="mx-auto max-w-280 px-6 pt-22">
+    <RevealSection class="mx-auto max-w-[85rem] px-6 pt-22">
         <p class="mb-2 text-xs font-medium uppercase tracking-[.3em] text-clay">{{ t('section.hotels') }}</p>
 
         <div

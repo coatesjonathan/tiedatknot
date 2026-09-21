@@ -11,7 +11,7 @@ const t = useCopy()
 </script>
 
 <template>
-    <RevealSection class="mx-auto max-w-[45rem] px-6 pt-22 text-center">
+    <RevealSection class="mx-auto max-w-[55rem] px-6 pt-22 text-center">
         <p class="mb-5.5 text-xs font-medium uppercase tracking-[.3em] text-clay">{{ t('section.gifts') }}</p>
 
         <div

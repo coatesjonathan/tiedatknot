@@ -12,9 +12,9 @@ const t = useCopy()
 </script>
 
 <template>
-    <RevealSection class="mx-auto max-w-[70rem] px-6 pt-22">
+    <RevealSection class="mx-auto max-w-[85rem] px-6 pt-22">
         <p class="mb-2 text-xs font-medium uppercase tracking-[.3em] text-clay">{{ t('section.travel') }}</p>
-        <div class="rich mb-7.5 max-w-[40rem] text-[1.0625rem] font-light leading-relaxed text-ink-soft" v-html="intro"></div>
+        <div class="rich mb-7.5 max-w-[50rem] text-[1.0625rem] font-light leading-relaxed text-ink-soft" v-html="intro"></div>
 
         <!-- 2px gaps over the rule colour give hairline dividers between cards -->
         <div class="grid gap-[2px] bg-rule [grid-template-columns:repeat(auto-fit,minmax(17.5rem,1fr))]">

@@ -96,14 +96,14 @@ const fieldClass =
         </h2>
 
         <div
-            class="rich mx-auto mt-4.5 max-w-[32.5rem] text-[1.0625rem] font-light leading-relaxed text-paper/85"
+            class="rich mx-auto mt-4.5 max-w-[40rem] text-[1.0625rem] font-light leading-relaxed text-paper/85"
             v-html="rsvp.body"
         ></div>
 
         <!-- What we have on file, once they have replied. -->
         <div
             v-if="replied && ! editing"
-            class="mx-auto mt-8.5 max-w-[32.5rem] rounded-sheet border border-paper/30 bg-paper/10 px-[1.625rem] py-7 text-paper"
+            class="mx-auto mt-8.5 max-w-[40rem] rounded-sheet border border-paper/30 bg-paper/10 px-[1.625rem] py-7 text-paper"
         >
             <p class="m-0 text-xs font-medium uppercase tracking-[.28em] text-paper/70">
                 {{ rsvp.repliedAtLabel ? t('rsvp.replied', { date: rsvp.repliedAtLabel }) : t('rsvp.replied_undated') }}
@@ -137,7 +137,7 @@ const fieldClass =
             </button>
         </div>
 
-        <form v-else class="mx-auto mt-8.5 max-w-[32.5rem] text-left" @submit.prevent="submit">
+        <form v-else class="mx-auto mt-8.5 max-w-[40rem] text-left" @submit.prevent="submit">
             <div class="flex flex-col gap-3 sm:flex-row">
                 <button
                     v-for="option in answers"

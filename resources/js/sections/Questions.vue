@@ -8,7 +8,7 @@ const t = useCopy()
 </script>
 
 <template>
-    <RevealSection class="mx-auto max-w-[51.25rem] px-6 pt-22">
+    <RevealSection class="mx-auto max-w-[60rem] px-6 pt-22">
         <p class="mb-5.5 text-xs font-medium uppercase tracking-[.3em] text-clay">{{ t('section.questions') }}</p>
 
         <details

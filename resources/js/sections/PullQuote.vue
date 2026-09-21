@@ -5,7 +5,7 @@ defineProps({ quote: { type: String, default: '' } })
 </script>
 
 <template>
-    <RevealSection class="mx-auto max-w-[45rem] px-6 pt-20 text-center">
+    <RevealSection class="mx-auto max-w-[55rem] px-6 pt-20 text-center">
         <!--
             Everything here is the couple's own formatting. `rich` carries the
             type scale — a Heading 1 becomes the big cursive line, the rest is

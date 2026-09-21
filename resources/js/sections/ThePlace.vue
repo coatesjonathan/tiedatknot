@@ -8,7 +8,7 @@ const t = useCopy()
 </script>
 
 <template>
-    <RevealSection class="mx-auto max-w-[70rem] px-6 pt-22">
+    <RevealSection class="mx-auto max-w-[85rem] px-6 pt-22">
         <p class="mb-[1.625rem] text-xs font-medium uppercase tracking-[.3em] text-clay">{{ t('section.place') }}</p>
 
         <div class="grid items-start gap-10 [grid-template-columns:repeat(auto-fit,minmax(18.125rem,1fr))]">
