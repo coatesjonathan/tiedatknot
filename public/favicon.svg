@@ -16,6 +16,7 @@
     </defs>
     <path d="M50,4 C74,4 96,22 96,50 C96,76 75,96 50,96 C25,96 4,76 4,50 C4,22 26,4 50,4 Z" fill="url(#waxG)" filter="url(#waxRough)" />
     <g clip-path="url(#discClip)">
-        <text x="50" y="65" text-anchor="middle" font-family="serif" font-size="36" fill="rgba(255,255,255,0.7)" font-weight="bold">JJ</text>
+        <text x="50" y="67.4" text-anchor="middle" font-family="serif" font-size="42" fill="rgba(19,27,17,.6)">JJ</text>
+        <text x="50" y="65.6" text-anchor="middle" font-family="serif" font-size="42" fill="rgba(225,235,223,.34)">JJ</text>
     </g>
 </svg>
