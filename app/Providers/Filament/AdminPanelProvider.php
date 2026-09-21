@@ -29,6 +29,7 @@ class AdminPanelProvider extends PanelProvider
             ->id('admin')
             ->path('admin')
             ->login()
+            ->favicon(asset('favicon.svg'))
             ->brandName('Jenny & Jonny')
             ->colors([
                 'primary' => Color::hex('#688662'),

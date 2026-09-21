@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+    <defs>
+        <radialGradient id="waxG" cx="33%" cy="23%" r="82%">
+            <stop offset="0%" stop-color="#7f9c78" />
+            <stop offset="38%" stop-color="#6d8a67" />
+            <stop offset="84%" stop-color="#55704f" />
+            <stop offset="100%" stop-color="#3d5138" />
+        </radialGradient>
+        <filter id="waxRough" x="-25%" y="-25%" width="150%" height="150%">
+            <feTurbulence type="fractalNoise" baseFrequency="0.06" numOctaves="3" seed="9" result="tn" />
+            <feDisplacementMap in="SourceGraphic" in2="tn" scale="3.4" xChannelSelector="R" yChannelSelector="G" />
+        </filter>
+        <clipPath id="discClip">
+            <path d="M50,4 C74,4 96,22 96,50 C96,76 75,96 50,96 C25,96 4,76 4,50 C4,22 26,4 50,4 Z" />
+        </clipPath>
+    </defs>
+    <path d="M50,4 C74,4 96,22 96,50 C96,76 75,96 50,96 C25,96 4,76 4,50 C4,22 26,4 50,4 Z" fill="url(#waxG)" filter="url(#waxRough)" />
+    <g clip-path="url(#discClip)">
+        <text x="50" y="65" text-anchor="middle" font-family="serif" font-size="36" fill="rgba(255,255,255,0.7)" font-weight="bold">JJ</text>
+    </g>
+</svg>
