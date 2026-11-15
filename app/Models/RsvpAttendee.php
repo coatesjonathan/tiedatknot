@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class RsvpAttendee extends Model
 {
-    protected $fillable = ['guest_id', 'name', 'dietary', 'sort_order'];
+    protected $fillable = ['guest_id', 'name', 'meal', 'dietary', 'sort_order'];
 
     protected function casts(): array
     {

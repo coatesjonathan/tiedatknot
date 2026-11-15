@@ -52,6 +52,11 @@ class GuestsTable
                     ->placeholder('—')
                     ->wrap()
                     ->toggleable(),
+                TextColumn::make('meal_summary')
+                    ->label('Main course')
+                    ->placeholder('—')
+                    ->wrap()
+                    ->toggleable(),
                 TextColumn::make('dietary_summary')
                     ->label('Dietary')
                     ->placeholder('None given')

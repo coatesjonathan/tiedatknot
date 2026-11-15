@@ -49,7 +49,7 @@ class Guest extends Model
      * Store a reply made on the site. The party replaces whatever was there
      * before, so a guest can come back and correct it; declining empties it.
      *
-     * @param  array<int, array{name: string, dietary: ?string}>  $party
+     * @param  array<int, array{name: string, meal?: ?string, dietary: ?string}>  $party
      */
     public function recordRsvp(bool $attending, array $party, ?string $note): void
     {
@@ -69,6 +69,7 @@ class Guest extends Model
         $this->attendees()->createMany(
             collect($party)->values()->map(fn (array $person, int $index) => [
                 'name' => $person['name'],
+                'meal' => ($person['meal'] ?? null) ?: null,
                 'dietary' => $person['dietary'] ?: null,
                 'sort_order' => $index,
             ])->all()
@@ -86,6 +87,15 @@ class Guest extends Model
             ->join('; ') ?: null);
     }
 
+    /** "Sam — Beef; Alex — Fish". Used by the admin table and the export. */
+    protected function mealSummary(): Attribute
+    {
+        return Attribute::get(fn (): ?string => $this->attendees
+            ->filter(fn (RsvpAttendee $person) => filled($person->meal))
+            ->map(fn (RsvpAttendee $person) => $person->name.' — '.$person->meal)
+            ->join('; ') ?: null);
+    }
+
     /** "Sam, Alex" — the party as one line. */
     protected function partyNames(): Attribute
     {
@@ -98,7 +108,11 @@ class Guest extends Model
     public function partyForForm(): Collection
     {
         return $this->attendees
-            ->map(fn (RsvpAttendee $person) => ['name' => $person->name, 'dietary' => $person->dietary ?? ''])
+            ->map(fn (RsvpAttendee $person) => [
+                'name' => $person->name,
+                'meal' => $person->meal ?? '',
+                'dietary' => $person->dietary ?? '',
+            ])
             ->values();
     }
 

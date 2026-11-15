@@ -124,6 +124,7 @@ class InvitationPayload
                 'guestName' => $guest?->name,
                 'status' => $guest?->rsvp_status ?? 'pending',
                 'party' => $guest?->partyForForm() ?? [],
+                'mealOptions' => $settings->mealLabels(),
                 'note' => $guest?->rsvp_note,
                 'repliedAtLabel' => $guest?->rsvp_submitted_at?->format('j F Y'),
             ],

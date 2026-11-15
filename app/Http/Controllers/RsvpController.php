@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Guest;
+use App\Models\Setting;
 use App\Support\SiteCopy;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class RsvpController extends Controller
@@ -17,11 +19,15 @@ class RsvpController extends Controller
     public function store(Request $request): RedirectResponse
     {
         $guest = $this->unlockedGuest($request);
+        $mealLabels = Setting::current()->mealLabels();
 
         $data = $request->validate([
             'attending' => ['required', 'boolean'],
             'party' => ['exclude_if:attending,false', 'required', 'array', 'min:1', 'max:'.$guest->seats],
             'party.*.name' => ['required', 'string', 'max:120'],
+            'party.*.meal' => $mealLabels
+                ? ['required', 'string', Rule::in($mealLabels)]
+                : ['prohibited'],
             'party.*.dietary' => ['nullable', 'string', 'max:500'],
             'rsvp_note' => ['nullable', 'string', 'max:2000'],
         ], [
@@ -30,6 +36,8 @@ class RsvpController extends Controller
             'party.min' => SiteCopy::line('rsvp.error_party'),
             'party.max' => SiteCopy::line('rsvp.error_party_max', ['count' => $guest->seats]),
             'party.*.name.required' => SiteCopy::line('rsvp.error_name'),
+            'party.*.meal.required' => SiteCopy::line('rsvp.error_meal'),
+            'party.*.meal.in' => SiteCopy::line('rsvp.error_meal'),
         ]);
 
         $guest->recordRsvp(

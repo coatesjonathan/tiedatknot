@@ -14,11 +14,21 @@ const mailto = computed(() => `mailto:${props.rsvp.email}?subject=${encodeURICom
 const replied = computed(() => props.rsvp.status !== 'pending')
 const isAttending = computed(() => props.rsvp.status === 'attending')
 
-const blankPerson = (name = '') => ({ name, dietary: '' })
+const mealOptions = computed(() => props.rsvp.mealOptions ?? [])
+
+// The first option is what's being served, so everyone starts on it.
+const defaultMeal = () => mealOptions.value[0] ?? ''
+
+// Keep a saved choice only while it's still on offer.
+const mealOrDefault = (meal) => (mealOptions.value.includes(meal) ? meal : defaultMeal())
+
+const blankPerson = (name = '') => ({ name, meal: defaultMeal(), dietary: '' })
 
 // The first row is the guest we invited; the rest are their plus ones.
 const startingParty = () =>
-    props.rsvp.party.length ? props.rsvp.party.map((person) => ({ ...person })) : [blankPerson(props.rsvp.guestName ?? '')]
+    props.rsvp.party.length
+        ? props.rsvp.party.map((person) => ({ ...person, meal: mealOrDefault(person.meal) }))
+        : [blankPerson(props.rsvp.guestName ?? '')]
 
 const form = useForm({
     attending: replied.value ? isAttending.value : null,
@@ -52,7 +62,16 @@ const removePerson = (index) => {
 
 const submit = () =>
     form
-        .transform((data) => (data.attending ? data : { ...data, party: [] }))
+        .transform((data) => {
+            if (! data.attending) {
+                return { ...data, party: [] }
+            }
+
+            // With no options on offer the server refuses a meal, so leave it off.
+            return mealOptions.value.length
+                ? data
+                : { ...data, party: data.party.map(({ meal, ...person }) => person) }
+        })
         .post(store().url, {
             preserveScroll: true,
             onSuccess: () => {
@@ -120,6 +139,7 @@ const fieldClass =
                     class="border-t border-paper/20 pt-2 text-base font-light"
                 >
                     {{ person.name }}
+                    <span v-if="person.meal" class="text-paper/70">— {{ person.meal }}</span>
                     <span v-if="person.dietary" class="text-paper/70">— {{ person.dietary }}</span>
                 </li>
             </ul>
@@ -201,6 +221,33 @@ const fieldClass =
                     />
                     <p v-if="personError(index, 'name')" class="mt-1.5 text-sm font-light text-paper">
                         {{ personError(index, 'name') }}
+                    </p>
+
+                    <fieldset v-if="mealOptions.length" class="m-0 mt-3.5 border-0 p-0">
+                        <legend class="p-0 text-xs font-medium uppercase tracking-[.22em] text-paper/70">
+                            {{ t('rsvp.meal_label') }}
+                        </legend>
+                        <p v-if="index === 0" class="mt-2 text-[0.9375rem] font-light leading-relaxed text-paper/75">
+                            {{ t('rsvp.meal_help') }}
+                        </p>
+                        <div class="mt-2.5 flex flex-wrap gap-2">
+                            <label
+                                v-for="option in mealOptions"
+                                :key="option"
+                                class="cursor-pointer rounded-sheet border px-4 py-2.5 text-[0.9375rem] font-light has-focus-visible:outline-2 has-focus-visible:outline-paper"
+                                :class="
+                                    person.meal === option
+                                        ? 'border-paper bg-paper text-olive'
+                                        : 'border-paper/40 bg-transparent text-paper'
+                                "
+                            >
+                                <input v-model="person.meal" type="radio" :name="`meal-${index}`" :value="option" class="sr-only" />
+                                {{ option }}
+                            </label>
+                        </div>
+                    </fieldset>
+                    <p v-if="personError(index, 'meal')" class="mt-1.5 text-sm font-light text-paper">
+                        {{ personError(index, 'meal') }}
                     </p>
 
                     <input

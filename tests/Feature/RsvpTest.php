@@ -128,3 +128,37 @@ it('sends the saved reply back to the invitation page', function () {
         ->assertSee('No nuts')
         ->assertSee('See you there.');
 });
+
+it('records each person\'s main course when options are on offer', function () {
+    Setting::current()->update(['meal_options' => ['Beef', 'Fish', 'Vegetarian']]);
+    $guest = guest();
+
+    $this->withSession(['guest_id' => $guest->id])
+        ->post('/rsvp', [
+            'attending' => true,
+            'party' => [
+                ['name' => 'Sam', 'meal' => 'Beef', 'dietary' => ''],
+                ['name' => 'Alex Rivers', 'meal' => 'Fish', 'dietary' => ''],
+            ],
+        ])
+        ->assertSessionHasNoErrors();
+
+    $guest->refresh();
+
+    expect($guest->attendees->pluck('meal')->all())->toBe(['Beef', 'Fish']);
+    expect($guest->meal_summary)->toBe('Sam — Beef; Alex Rivers — Fish');
+});
+
+it('rejects a main course that is not on offer, or none at all', function (?string $meal) {
+    Setting::current()->update(['meal_options' => ['Beef', 'Fish']]);
+    $guest = guest();
+
+    $this->withSession(['guest_id' => $guest->id])
+        ->post('/rsvp', [
+            'attending' => true,
+            'party' => [['name' => 'Sam', 'meal' => $meal, 'dietary' => '']],
+        ])
+        ->assertSessionHasErrors('party.0.meal');
+
+    expect($guest->refresh()->attendees)->toHaveCount(0);
+})->with(['not on offer' => 'Chicken', 'missing' => null]);

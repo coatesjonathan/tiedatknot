@@ -111,6 +111,13 @@ class ManageSettings extends Page
                     ->schema([
                         DatePicker::make('rsvp_deadline')->label('Reply by'),
                         TextInput::make('block_code')->label('Hotel block code'),
+                        Repeater::make('meal_options')
+                            ->label('Main course options')
+                            ->helperText("Put what's being served first — every guest starts on it and can switch to any of the others. Leave empty to hide the question.")
+                            ->simple(TextInput::make('label')->required()->maxLength(60))
+                            ->reorderable()
+                            ->addActionLabel('Add an option')
+                            ->columnSpanFull(),
                         TextInput::make('honeymoon_url')->label('Honeymoon fund link')->url(),
                     ]),
 

@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\Guests\Schemas;
 
+use App\Models\Setting;
 use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
@@ -63,13 +64,21 @@ class GuestForm
                             ->label('Who is coming')
                             ->relationship()
                             ->orderColumn('sort_order')
-                            ->columns(2)
+                            ->columns(3)
                             ->addActionLabel('Add someone')
                             ->itemLabel(fn (array $state): ?string => $state['name'] ?? null)
                             ->schema([
                                 TextInput::make('name')
                                     ->required()
                                     ->maxLength(120),
+                                Select::make('meal')
+                                    ->label('Main course')
+                                    ->options(fn (?string $state): array => collect(Setting::current()->mealLabels())
+                                        ->push($state)
+                                        ->filter()
+                                        ->unique()
+                                        ->mapWithKeys(fn (string $label) => [$label => $label])
+                                        ->all()),
                                 TextInput::make('dietary')
                                     ->label('Dietary requirements')
                                     ->maxLength(500),

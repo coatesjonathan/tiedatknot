@@ -21,6 +21,7 @@ class GuestExporter extends Exporter
             ExportColumn::make('attending_count')->label('Seats taken'),
             ExportColumn::make('rsvp_status')->label('RSVP'),
             ExportColumn::make('party_names')->label('Who is coming'),
+            ExportColumn::make('meal_summary')->label('Main course'),
             ExportColumn::make('dietary_summary')->label('Dietary requirements'),
             ExportColumn::make('rsvp_note')->label('Their message'),
             ExportColumn::make('rsvp_submitted_at')->label('Replied at'),
