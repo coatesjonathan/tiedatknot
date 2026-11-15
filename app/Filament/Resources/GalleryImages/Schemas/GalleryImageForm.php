@@ -16,6 +16,11 @@ class GalleryImageForm
                     ->label('Photo')
                     ->image()
                     ->imageEditor()
+                    ->automaticallyResizeImagesMode('contain')
+                    ->automaticallyResizeImagesToWidth('2000')
+                    ->automaticallyResizeImagesToHeight('2000')
+                    ->automaticallyUpscaleImagesWhenResizing(false)
+                    ->helperText('Crop with the editor if you like. Photos are scaled down to 2000px on the longest side as they upload.')
                     ->directory('wedding/gallery')
                     ->required()
                     ->columnSpanFull(),
