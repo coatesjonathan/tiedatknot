@@ -4,7 +4,6 @@ namespace App\Filament\Resources\GalleryImages\Schemas;
 
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\TextInput;
-use Filament\Forms\Components\Toggle;
 use Filament\Schemas\Schema;
 
 class GalleryImageForm
@@ -22,9 +21,6 @@ class GalleryImageForm
                     ->columnSpanFull(),
                 TextInput::make('caption')
                     ->maxLength(255),
-                Toggle::make('is_wide')
-                    ->label('Double width')
-                    ->helperText('Spans two columns in the grid.'),
             ]);
     }
 }

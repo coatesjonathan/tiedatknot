@@ -9,13 +9,6 @@ class GalleryImage extends Model
 {
     protected $guarded = [];
 
-    protected function casts(): array
-    {
-        return [
-            'is_wide' => 'boolean',
-        ];
-    }
-
     public function scopePublished(Builder $query): Builder
     {
         return $query->orderBy('sort_order');

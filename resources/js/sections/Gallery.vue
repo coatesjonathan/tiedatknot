@@ -11,14 +11,9 @@ const t = useCopy()
     <RevealSection v-if="images.length" class="mx-auto max-w-[85rem] px-6 pt-22">
         <p class="mb-[1.625rem] text-xs font-medium uppercase tracking-[.3em] text-clay">{{ t('section.gallery') }}</p>
 
-        <div class="grid gap-3.5 [grid-template-columns:repeat(auto-fit,minmax(12.5rem,1fr))]">
-            <div
-                v-for="(image, index) in images"
-                :key="index"
-                class="aspect-video overflow-hidden bg-card"
-                :class="image.isWide && 'col-span-2'"
-            >
-                <img :src="image.image" :alt="image.caption ?? ''" loading="lazy" class="size-full object-cover" />
+        <div class="columns-2 gap-3.5 md:columns-3 lg:columns-4">
+            <div v-for="(image, index) in images" :key="index" class="mb-3.5 break-inside-avoid overflow-hidden bg-card">
+                <img :src="image.image" :alt="image.caption ?? ''" loading="lazy" class="block h-auto w-full" />
             </div>
         </div>
     </RevealSection>

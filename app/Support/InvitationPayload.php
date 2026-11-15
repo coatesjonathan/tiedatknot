@@ -113,7 +113,6 @@ class InvitationPayload
             'gallery' => GalleryImage::published()->get()->map(fn (GalleryImage $image) => [
                 'image' => $this->url($image->image_path),
                 'caption' => $image->caption,
-                'isWide' => $image->is_wide,
             ])->values(),
 
             'rsvp' => [
