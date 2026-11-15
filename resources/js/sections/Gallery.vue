@@ -15,7 +15,7 @@ const t = useCopy()
             <div
                 v-for="(image, index) in images"
                 :key="index"
-                class="h-[18.75rem] overflow-hidden bg-card"
+                class="aspect-video overflow-hidden bg-card"
                 :class="image.isWide && 'col-span-2'"
             >
                 <img :src="image.image" :alt="image.caption ?? ''" loading="lazy" class="size-full object-cover" />
