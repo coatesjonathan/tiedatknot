@@ -32,9 +32,7 @@ const t = useCopy()
 
         <div class="grid gap-6.5 grid-cols-[repeat(auto-fit,minmax(18.75rem,1fr))]">
             <div v-for="hotel in hotels" :key="hotel.name + hotel.label" class="flex flex-col bg-card">
-                <div class="h-45 overflow-hidden">
-                    <img v-if="hotel.image" :src="hotel.image" :alt="hotel.name" loading="lazy" class="size-full object-cover" />
-                </div>
+                <img v-if="hotel.image" :src="hotel.image" :alt="hotel.name" loading="lazy" class="w-full aspect-video" />
 
                 <div class="px-6 pb-7 pt-6.5">
                     <p class="m-0 text-[0.6875rem] font-medium uppercase tracking-[.26em] text-olive">{{ hotel.label }}</p>
