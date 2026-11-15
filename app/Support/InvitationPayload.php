@@ -94,6 +94,7 @@ class InvitationPayload
                 'image' => $this->url($hotel->image_path),
             ])->values(),
 
+            'highlightsIntro' => RichText::html($settings->highlights_intro),
             'highlights' => Highlight::published()->get()->map(fn (Highlight $highlight) => [
                 'title' => $highlight->title,
                 'body' => RichText::html($highlight->body),

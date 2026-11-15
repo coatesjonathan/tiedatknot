@@ -93,6 +93,7 @@ class ManageSettings extends Page
                         static::copy('travel_footnote'),
                         static::copy('hotels_intro')
                             ->helperText('Write :code where the hotel block code should appear.'),
+                        static::copy('highlights_intro')->label("While you're here intro"),
                         static::copy('gifts_body')->label('Gifts section'),
                         Repeater::make('gift_payment_methods')
                             ->label('Payment methods')

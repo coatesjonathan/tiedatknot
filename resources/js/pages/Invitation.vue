@@ -125,7 +125,12 @@ watch(email, (value) => {
             :block-code="invitation.blockCode"
             :hotels="invitation.hotels"
         />
-        <WhileYoureHere v-if="shown('while-youre-here')" id="while-youre-here" :highlights="invitation.highlights" />
+        <WhileYoureHere
+            v-if="shown('while-youre-here')"
+            id="while-youre-here"
+            :intro="invitation.highlightsIntro"
+            :highlights="invitation.highlights"
+        />
         <Gallery v-if="shown('gallery')" id="gallery" :images="invitation.gallery" />
         <Gifts
             v-if="shown('gifts')"

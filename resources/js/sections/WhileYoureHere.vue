@@ -2,7 +2,10 @@
 import { useCopy } from '@/composables/useCopy'
 import RevealSection from '@/components/RevealSection.vue'
 
-defineProps({ highlights: { type: Array, default: () => [] } })
+defineProps({
+    intro: { type: String, default: '' },
+    highlights: { type: Array, default: () => [] },
+})
 
 const t = useCopy()
 </script>
@@ -10,6 +13,11 @@ const t = useCopy()
 <template>
     <RevealSection class="mx-auto max-w-[85rem] px-6 pt-22">
         <p class="mb-[1.625rem] text-xs font-medium uppercase tracking-[.3em] text-clay">{{ t('section.highlights') }}</p>
+        <div
+            v-if="intro"
+            class="rich mb-7.5 max-w-[50rem] text-[1.0625rem] font-light leading-relaxed text-ink-soft"
+            v-html="intro"
+        ></div>
 
         <div class="grid gap-[2.125rem] [grid-template-columns:repeat(auto-fit,minmax(14.375rem,1fr))]">
             <div v-for="item in highlights" :key="item.title">
